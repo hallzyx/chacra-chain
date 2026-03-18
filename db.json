@@ -1,0 +1,150 @@
+{
+  "users": [
+    {
+      "id": "8f1e0cb2-4516-4a89-9f44-25c41d8d4316",
+      "email": "test@chacrachain.com",
+      "passwordHash": "e05eb6841f4c3d107951d1a2ea2c633d:013d8253c2a9b76175b69748800fdb8f3af274b4cf7965c7f1a746abbba85d41202d00579766884c91eb89e1fe1d2a70ec5d516012714ef317d60d1b4fed2cfb",
+      "agricultorId": "AGR-2910",
+      "walletId": "13b16134-0d98-4431-99e6-c5c53bd42097",
+      "createdAt": "2026-03-18T03:33:42.865Z"
+    },
+    {
+      "id": "ea333441-7436-42c2-ac50-6e015282bf6b",
+      "email": "test2@chacrachain.com",
+      "passwordHash": "fc7da6307862899c5bcb6ebf7d18cbac:de87bb41a99a0fb1a82c2da28a8994718ed979b18202322c184df807e50c661eceab960f04f7caf71ebb04158b1db5db95ba7c6b8be7dc5607ee0424618447eb",
+      "agricultorId": "AGR-3701",
+      "walletId": "643d0f76-8982-4ae6-8ca3-57ebfbabdbd0",
+      "createdAt": "2026-03-18T04:16:56.230Z"
+    }
+  ],
+  "wallets": [
+    {
+      "id": "13b16134-0d98-4431-99e6-c5c53bd42097",
+      "userId": "8f1e0cb2-4516-4a89-9f44-25c41d8d4316",
+      "hederaAccountId": "0.0.8270077",
+      "encryptedPrivateKey": "Za59epjvAfpF4FAojRvPsVGEp+RNvG1jxnIjDVHtW7RXmiFB+FB/mQeOsvy+bkuWaQc1avOZTMjd0CvPZPkNcdigDNep1xkj24iHSS39S7M5GpW01U1jx43hihx6hpp35bsSGxibQVVJawNR9MXQVQaK+o/pRpxLF7gmcQ==",
+      "publicKey": "302a300506032b657003210051207c84a132eb1a6215887ba673abe15c8e6a609a264c03f93a1cea05391d4f",
+      "createdAt": "2026-03-18T03:33:42.865Z"
+    },
+    {
+      "id": "643d0f76-8982-4ae6-8ca3-57ebfbabdbd0",
+      "userId": "ea333441-7436-42c2-ac50-6e015282bf6b",
+      "hederaAccountId": "0.0.8270340",
+      "encryptedPrivateKey": "FjA6A+ujw8OTavd1zFiDMD8cVT9qilhjNsqv/5gBqATDEWD2TGQJwqo5t6xe+oX+FKiaGr+vHbfBF3Q/tOnQRDpLh5YyE2DwVsA25QOZfRq3PA1/MScbZfH6OfYAVcdVbhFd7iPaERNhvVsBHIrbMYidNCmfMh6t1vd6IQ==",
+      "publicKey": "302a300506032b65700321005d7c5893d14c3449567a7a5da3abe15411aa9e10b528d59bd2ac8d3c0a997484",
+      "createdAt": "2026-03-18T04:16:56.230Z"
+    }
+  ],
+  "sales": [
+    {
+      "id": "edb8332b-bd71-4e44-bb5f-ba4c5b84acfa",
+      "userId": "8f1e0cb2-4516-4a89-9f44-25c41d8d4316",
+      "agricultorId": "AGR-2910",
+      "variedadCultivo": "Papa Canchan",
+      "cantidadKg": 5000,
+      "precioUnitarioPen": 1.2,
+      "fechaTransaccion": "2026-03-17T19:11:23-05:00",
+      "hcsEventId": "9ef22c00-2e0b-49ea-b6cb-dde6ee66963d",
+      "createdAt": "2026-03-18T03:34:50.160Z"
+    },
+    {
+      "id": "e3028766-eecc-4b1d-8296-f00a90308852",
+      "userId": "ea333441-7436-42c2-ac50-6e015282bf6b",
+      "agricultorId": "AGR-3701",
+      "variedadCultivo": "Papa Yungay",
+      "cantidadKg": 3000,
+      "precioUnitarioPen": 1.5,
+      "fechaTransaccion": "2026-03-17T20:30:00-05:00",
+      "hcsEventId": "5c190586-3315-46ed-a2e4-8837386735f9",
+      "createdAt": "2026-03-18T04:17:35.758Z"
+    },
+    {
+      "id": "7d266d08-f00b-4d40-a90e-e2b02cdf4381",
+      "userId": "ea333441-7436-42c2-ac50-6e015282bf6b",
+      "agricultorId": "AGR-3701",
+      "variedadCultivo": "Papa Blanca",
+      "cantidadKg": 2000,
+      "precioUnitarioPen": 1.15,
+      "fechaTransaccion": "2026-03-18T10:00:00-05:00",
+      "hcsEventId": "87de4a89-79e4-4a36-99a8-a635589e1b16",
+      "createdAt": "2026-03-18T05:07:26.127Z"
+    }
+  ],
+  "hcsEvents": [
+    {
+      "id": "9ef22c00-2e0b-49ea-b6cb-dde6ee66963d",
+      "topicId": "0.0.8269985",
+      "transactionId": "0.0.7974311@1773804881.676260179",
+      "consensusTimestamp": "1@2026-03-18T03:34:50.157Z",
+      "message": "{\"agricultor_id\":\"AGR-2910\",\"variedad_cultivo\":\"Papa Canchan\",\"cantidad_kg\":5000,\"precio_unitario_pen\":1.2,\"fecha_transaccion\":\"2026-03-17T19:11:23-05:00\"}",
+      "createdAt": "2026-03-18T03:34:50.160Z"
+    },
+    {
+      "id": "5c190586-3315-46ed-a2e4-8837386735f9",
+      "topicId": "0.0.8269985",
+      "transactionId": "0.0.7974311@1773807450.015540524",
+      "consensusTimestamp": "2@2026-03-18T04:17:35.757Z",
+      "message": "{\"agricultor_id\":\"AGR-3701\",\"variedad_cultivo\":\"Papa Yungay\",\"cantidad_kg\":3000,\"precio_unitario_pen\":1.5,\"fecha_transaccion\":\"2026-03-17T20:30:00-05:00\"}",
+      "createdAt": "2026-03-18T04:17:35.758Z"
+    },
+    {
+      "id": "87de4a89-79e4-4a36-99a8-a635589e1b16",
+      "topicId": "0.0.8269985",
+      "transactionId": "0.0.7974311@1773810437.744699157",
+      "consensusTimestamp": "3@2026-03-18T05:07:26.126Z",
+      "message": "{\"agricultor_id\":\"AGR-3701\",\"variedad_cultivo\":\"Papa Blanca\",\"cantidad_kg\":2000,\"precio_unitario_pen\":1.15,\"fecha_transaccion\":\"2026-03-18T10:00:00-05:00\"}",
+      "createdAt": "2026-03-18T05:07:26.127Z"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "b9d0a98a-8fe8-4551-b014-e04e206f36c0",
+      "userId": "8f1e0cb2-4516-4a89-9f44-25c41d8d4316",
+      "token": "9607769f30ed8f02cba3bc5f26a287145da399f375eaf351f3c70c88ad9db6f9",
+      "createdAt": "2026-03-18T03:33:42.865Z",
+      "expiresAt": "2026-03-25T03:33:42.914Z"
+    },
+    {
+      "id": "fd614eeb-b574-4c3a-ae9e-80bfb2adc90e",
+      "userId": "8f1e0cb2-4516-4a89-9f44-25c41d8d4316",
+      "token": "06cec407ae22e98046b85a07a09e8c07911c9b57773c74eb8b6ea400f2a03e6b",
+      "createdAt": "2026-03-18T03:34:05.613Z",
+      "expiresAt": "2026-03-25T03:34:05.613Z"
+    },
+    {
+      "id": "9e2007b9-2433-4ffb-8859-ba1d4425f228",
+      "userId": "8f1e0cb2-4516-4a89-9f44-25c41d8d4316",
+      "token": "6508fba5d1778fd049ecea56b0c2f5b76d21276e0b6e44fe90d53d343013182b",
+      "createdAt": "2026-03-18T04:01:00.678Z",
+      "expiresAt": "2026-03-25T04:01:00.679Z"
+    },
+    {
+      "id": "478c6183-bee5-4231-a13e-dc0fe587517b",
+      "userId": "ea333441-7436-42c2-ac50-6e015282bf6b",
+      "token": "6b30ffaca5cac046a744439f82a53f95bdf065e500d1a0235b070ffd936930fa",
+      "createdAt": "2026-03-18T04:16:56.230Z",
+      "expiresAt": "2026-03-25T04:16:56.287Z"
+    },
+    {
+      "id": "56212cd4-e357-462f-968d-c83a6008f4ac",
+      "userId": "ea333441-7436-42c2-ac50-6e015282bf6b",
+      "token": "ab1775a2c644fca24d749dc9f2650752ae3b86ad7f433dd83084216dd99157c2",
+      "createdAt": "2026-03-18T04:17:20.210Z",
+      "expiresAt": "2026-03-25T04:17:20.210Z"
+    },
+    {
+      "id": "de2e9982-ef13-41a2-9aa4-29620bac6b0a",
+      "userId": "ea333441-7436-42c2-ac50-6e015282bf6b",
+      "token": "9c4700e53e0eb003a97d47bb98a4259eab066f1692c41e96604a2600ba92ec56",
+      "createdAt": "2026-03-18T04:56:32.302Z",
+      "expiresAt": "2026-03-25T04:56:32.303Z"
+    },
+    {
+      "id": "f5ebba5e-0928-4426-bb6f-4297e4e57360",
+      "userId": "ea333441-7436-42c2-ac50-6e015282bf6b",
+      "token": "4c40d731dd47e294ac3d1b4243fe39944cb4690b75c18f510d734fd0b746de13",
+      "createdAt": "2026-03-18T05:07:14.586Z",
+      "expiresAt": "2026-03-25T05:07:14.597Z"
+    }
+  ]
+}
