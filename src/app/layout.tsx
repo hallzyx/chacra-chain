@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
-import { Orbitron, Exo_2 } from "next/font/google";
+import { Manrope, Inter } from "next/font/google";
 import "./globals.css";
 
-const orbitron = Orbitron({
-  variable: "--font-orbitron",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "700"],
 });
 
-const exo2 = Exo_2({
-  variable: "--font-exo-2",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: "ChacraChain - AgriTech Web3 Solution",
-  description: "Registra ventas agrícolas de forma inmutable y consulta precios promedio verificados en cadena",
+  title: "ChacraChain - Mis Ventas",
+  description: "Registra y consulta tus ventas agrícolas verificadas en Hedera Consensus Service",
 };
 
 export default function RootLayout({
@@ -25,9 +25,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="es">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap"
+        />
+      </head>
       <body
-        className={`${orbitron.variable} ${exo2.variable} antialiased`}
+        className={`${manrope.variable} ${inter.variable} antialiased`}
       >
         {children}
       </body>

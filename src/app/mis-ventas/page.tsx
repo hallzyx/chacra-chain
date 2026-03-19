@@ -2,7 +2,22 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Download, ExternalLink, Upload, X } from "lucide-react";
+import { 
+  LayoutGrid, 
+  ArrowLeft, 
+  BadgeCheck, 
+  Receipt, 
+  Tractor, 
+  List, 
+  Sprout, 
+  ExternalLink, 
+  Clock, 
+  PackageOpen,
+  PlusCircle,
+  Home,
+  Store,
+  User
+} from "lucide-react";
 
 interface SaleWithHcs {
   sale: {
@@ -26,12 +41,17 @@ interface SaleWithHcs {
 
 /**
  * Page showing user's sales records with HashScan links for verification.
+ * Styled with ChacraChain AgriTech Design System from Stich.
  */
 export default function MisVentasPage() {
   const router = useRouter();
   const [salesWithHcs, setSalesWithHcs] = useState<SaleWithHcs[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Calculate totals
+  const totalRegistradas = salesWithHcs.length;
+  const volumenTotal = salesWithHcs.reduce((acc, { sale }) => acc + sale.cantidadKg, 0);
 
   // Load user's sales with HCS data
   useEffect(() => {
@@ -87,221 +107,253 @@ export default function MisVentasPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#0F0F23] to-[#0F0F23]/50 flex flex-col">
-        <header className="bg-[#0F0F23]/80 backdrop-blur-sm text-white p-6 shadow-md">
-          <div className="max-w-4xl mx-auto flex justify-between items-center">
-            <button onClick={() => window.history.back()} className="text-white/80 hover:text-white transition">
-              <Upload className="h-5 w-5 mr-2" /> ← Volver
-            </button>
-            <h1 className="text-xl font-semibold text-[#F8FAFC]">Mis Ventas Registradas</h1>
-            <span className="text-sm opacity-90 text-[#A78BFA]" />
+      <div className="min-h-screen bg-background flex flex-col">
+        {/* Header */}
+        <header className="flex items-center justify-between whitespace-nowrap border-b border-primary/10 px-4 md:px-10 py-3">
+          <div className="flex items-center gap-4 text-primary">
+            <div className="size-6 bg-primary text-white rounded flex items-center justify-center">
+              <LayoutGrid className="w-4 h-4" />
+            </div>
+            <div>
+              <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Mis Ventas</h2>
+              <p className="text-primary/70 text-xs font-medium">ChacraChain x Hedera</p>
+            </div>
           </div>
         </header>
 
-        <main className="flex-1 p-6">
-          <div className="flex flex-col items-center justify-center py-12">
-            <div className="animate-pulse h-16 w-16 text-[#FBBF24]">
-              <Download className="h-6 w-6 animate-spin" />
+        {/* Loading State */}
+        <main className="flex-1 px-4 md:px-10 py-8 max-w-5xl mx-auto w-full">
+          <div className="flex flex-col items-center justify-center py-20">
+            <div className="size-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4 animate-pulse">
+              <Sprout className="w-8 h-8 animate-spin" />
             </div>
-            <p className="mt-4 text-[#F8FAFC]/80 text-center">Cargando tus ventas...</p>
+            <p className="text-foreground/60 text-center">Cargando tus ventas...</p>
           </div>
         </main>
-
-        <footer className="bg-[#0F0F23]/80 backdrop-blur-sm text-white text-center p-4">
-          <p className="text-sm text-[#F8FAFC]/70">
-            Tus ventas están registradas de forma inmutable en Hedera Consensus Service
-          </p>
-        </footer>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#0F0F23] to-[#0F0F23]/50 flex flex-col">
-        <header className="bg-[#0F0F23]/80 backdrop-blur-sm text-white p-6 shadow-md">
-          <div className="max-w-4xl mx-auto flex justify-between items-center">
-            <button onClick={() => window.history.back()} className="text-white/80 hover:text-white transition">
-              <Upload className="h-5 w-5 mr-2" /> ← Volver
-            </button>
-            <h1 className="text-xl font-semibold text-[#F8FAFC]">Mis Ventas Registradas</h1>
-            <span className="text-sm opacity-90 text-[#A78BFA]" />
+      <div className="min-h-screen bg-background flex flex-col">
+        {/* Header */}
+        <header className="flex items-center justify-between whitespace-nowrap border-b border-primary/10 px-4 md:px-10 py-3">
+          <div className="flex items-center gap-4 text-primary">
+            <div className="size-6 bg-primary text-white rounded flex items-center justify-center">
+              <LayoutGrid className="w-4 h-4" />
+            </div>
+            <div>
+              <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Mis Ventas</h2>
+              <p className="text-primary/70 text-xs font-medium">ChacraChain x Hedera</p>
+            </div>
           </div>
         </header>
 
-        <main className="flex-1 p-6">
-          <div className="bg-[#F87171]/10 border border-[#F87171]/30 text-[#F87171] px-6 py-4 rounded-xl mb-6 text-center">
-            <div className="flex items-center mb-2">
-              <X className="h-4 w-4 mr-2 text-[#F87171]" />
+        {/* Error State */}
+        <main className="flex-1 px-4 md:px-10 py-8 max-w-5xl mx-auto w-full">
+          <div className="bg-red-500/10 border border-red-500/30 text-red-600 px-6 py-4 rounded-xl text-center">
+            <div className="flex items-center justify-center mb-2">
+              <span className="mr-2">⚠️</span>
               <p className="font-medium">Error al cargar ventas</p>
             </div>
-            <p className="text-sm mt-1 text-[#F8FAFC]/70">{error}</p>
+            <p className="text-sm mt-1 text-red-600/70">{error}</p>
           </div>
         </main>
-
-        <footer className="bg-[#0F0F23]/80 backdrop-blur-sm text-white text-center p-4">
-          <p className="text-sm text-[#F8FAFC]/70">
-            Tus ventas están registradas de forma inmutable en Hedera Consensus Service
-          </p>
-        </footer>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0F0F23] to-[#0F0F23]/50 flex flex-col">
-      <header className="bg-[#0F0F23]/80 backdrop-blur-sm text-white p-6 shadow-md">
-        <div className="max-w-4xl mx-auto flex justify-between items-center">
-          <button onClick={() => window.history.back()} className="text-white/80 hover:text-white transition">
-            <Upload className="h-5 w-5 mr-2" /> ← Volver
-          </button>
-          <h1 className="text-xl font-semibold text-[#F8FAFC]">Mis Ventas Registradas</h1>
-          <span className="text-sm opacity-90 text-[#A78BFA]" />
+    <div className="min-h-screen bg-background flex flex-col">
+      {/* Header */}
+      <header className="flex items-center justify-between whitespace-nowrap border-b border-primary/10 px-4 md:px-10 py-3">
+        <div className="flex items-center gap-4 text-primary">
+          <div className="size-6 bg-primary text-white rounded flex items-center justify-center">
+            <LayoutGrid className="w-4 h-4" />
+          </div>
+          <div>
+            <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Mis Ventas</h2>
+            <p className="text-primary/70 text-xs font-medium">ChacraChain x Hedera</p>
+          </div>
         </div>
+        <button
+          onClick={() => router.push("/")}
+          className="flex items-center justify-center rounded h-10 bg-primary/10 text-primary hover:bg-primary/20 transition-all px-4 gap-2 text-sm font-bold"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          <span>Volver</span>
+        </button>
       </header>
 
-      <main className="flex-1 p-6">
-        {salesWithHcs.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-[#F8FAFC]/70">
-              Aún no has registrado ninguna venta. ¡Comienza tu primer registro en ChacraChain!
-            </p>
-            <div className="mt-6">
-              <a
-                href="/registrar-venta"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#8B5CF6] hover:bg-[#8B5CF6]/80 text-white py-2.5 px-4 font-medium transition"
+      {/* Main Content */}
+      <main className="flex-1 px-4 md:px-10 py-6 max-w-5xl mx-auto w-full">
+        {/* Title Section */}
+        <div className="mb-8">
+          <h1 className="text-foreground tracking-tight text-3xl font-bold leading-tight">Historial de Ventas</h1>
+          <p className="text-secondary text-sm font-normal mt-1 flex items-center gap-1">
+            <BadgeCheck className="w-4 h-4 text-primary" />
+            Registros inmutables en la red Hedera Hashgraph
+          </p>
+        </div>
+
+        {/* Stats Cards */}
+        <div className="flex flex-wrap gap-4 mb-10">
+          <div className="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-primary/10 bg-surface-container-low shadow-sm">
+            <div className="flex items-center justify-between">
+              <p className="text-secondary text-sm font-medium">Total Registradas</p>
+              <Receipt className="w-5 h-5 text-primary" />
+            </div>
+            <p className="text-foreground tracking-tight text-3xl font-bold">{totalRegistradas}</p>
+          </div>
+          <div className="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-primary/10 bg-surface-container-low shadow-sm">
+            <div className="flex items-center justify-between">
+              <p className="text-secondary text-sm font-medium">Volumen Total</p>
+              <Tractor className="w-5 h-5 text-primary" />
+            </div>
+            <div className="flex items-baseline gap-1">
+              <p className="text-foreground tracking-tight text-3xl font-bold">{volumenTotal.toLocaleString()}</p>
+              <p className="text-secondary text-lg font-semibold">kg</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Sales List */}
+        <div className="flex flex-col gap-4 pb-20">
+          <h3 className="text-foreground text-lg font-bold flex items-center gap-2 mb-2">
+            <List className="w-5 h-5 text-primary" />
+            Registros Recientes
+          </h3>
+
+          {salesWithHcs.length === 0 ? (
+            // Empty State
+            <div className="flex flex-col items-center justify-center py-12 px-4 text-center border-2 border-dashed border-primary/20 rounded-2xl bg-primary/5 mt-4">
+              <div className="size-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
+                <PackageOpen className="w-8 h-8" />
+              </div>
+              <h4 className="text-foreground text-xl font-bold mb-2">No hay ventas registradas</h4>
+              <p className="text-secondary max-w-sm mb-6">Todas tus transacciones son seguras y verificables mediante el ID de transacción de Hedera.</p>
+              <button
+                onClick={() => router.push("/registrar-venta")}
+                className="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-primary/90 transition-all flex items-center gap-2"
               >
-                <Upload className="w-4 h-4" /> Registrar Primera Venta
-              </a>
+                <PlusCircle className="w-5 h-5" />
+                Registrar nueva venta
+              </button>
             </div>
-          </div>
-        ) : (
-          <div className="space-y-6">
-            <h2 className="text-lg font-semibold text-[#F8FAFC]/90 mb-4">
-              Tus {salesWithHcs.length} venta{salesWithHcs.length === 1 ? "" : "s"} registrada{salesWithHcs.length === 1 ? "" : "s"}
-            </h2>
-            <div className="space-y-4">
-              {salesWithHcs.map(({ sale, hcsEvent }) => (
-                <div key={sale.id} className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-6">
-                  <div className="mb-4">
-                    <div className="flex items-center gap-2">
-                      <div className="p-2 rounded-full bg-[#8B5CF6]/20">
-                        <Download className="w-5 h-5 text-[#8B5CF6]" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-[#F8FAFC]">Venta #{sale.id.substring(0, 8)}...</h3>
-                        <p className="text-sm text-[#F8FAFC]/70">
-                          {new Date(sale.createdAt).toLocaleString()}
-                        </p>
-                      </div>
+          ) : (
+            // Sales List
+            salesWithHcs.map(({ sale, hcsEvent }) => {
+              const totalVenta = sale.cantidadKg * sale.precioUnitarioPen;
+              const fecha = new Date(sale.createdAt);
+              const fechaStr = fecha.toLocaleDateString("es-PE", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              });
+              const horaStr = fecha.toLocaleTimeString("es-PE", {
+                hour: "2-digit",
+                minute: "2-digit",
+              });
+
+              return (
+                <div
+                  key={sale.id}
+                  className="bg-surface-container-low rounded-xl border border-primary/10 p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-primary/30 transition-all shadow-sm"
+                >
+                  {/* Left: Icon and Info */}
+                  <div className="flex items-center gap-4">
+                    <div className="size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                      <Sprout className="w-7 h-7" />
+                    </div>
+                    <div>
+                      <p className="text-foreground font-bold text-lg">{sale.variedadCultivo}</p>
+                      <p className="text-secondary text-sm">{fechaStr} • {horaStr}</p>
                     </div>
                   </div>
 
-                  <div className="grid gap-4 md:grid-cols-2">
+                  {/* Middle: Stats Grid */}
+                  <div className="grid grid-cols-2 md:flex md:gap-8 border-t md:border-t-0 pt-4 md:pt-0 border-surface-container-high">
                     <div>
-                      <p className="text-sm font-medium text-[#F8FAFC]/90">Agricultor</p>
-                      <p className="text-lg font-semibold text-[#F8FAFC]">{sale.agricultorId}</p>
+                      <p className="text-secondary text-xs uppercase tracking-wider font-bold">Cantidad</p>
+                      <p className="text-foreground font-bold">{sale.cantidadKg.toLocaleString()} kg</p>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-[#F8FAFC]/90">Variedad</p>
-                      <p className="text-lg font-semibold text-[#F8FAFC]">{sale.variedadCultivo}</p>
+                      <p className="text-secondary text-xs uppercase tracking-wider font-bold">Precio Unit.</p>
+                      <p className="text-foreground font-bold">S/ {sale.precioUnitarioPen.toFixed(2)}</p>
                     </div>
-                    <div>
-                      <p className="text-sm font-medium text-[#F8FAFC]/90">Cantidad</p>
-                      <p className="text-lg font-semibold text-[#F8FAFC]">
-                        {sale.cantidadKg.toLocaleString()} kg
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-[#F8FAFC]/90">Precio Unitario</p>
-                      <p className="text-lg font-semibold text-[#F8FAFC]">
-                        S/ {sale.precioUnitarioPen.toFixed(2)}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-[#F8FAFC]/90">Fecha Transacción</p>
-                      <p className="text-lg font-mono text-[#F8FAFC]/90">
-                        {new Date(sale.fechaTransaccion).toLocaleString()}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-[#F8FAFC]/90">Total Venta</p>
-                      <p className="text-lg font-semibold text-[#F8FAFC]">
-                        S/ {(sale.cantidadKg * sale.precioUnitarioPen).toLocaleString(undefined, {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        })}
-                      </p>
+                    <div className="hidden lg:block">
+                      <p className="text-secondary text-xs uppercase tracking-wider font-bold">Total</p>
+                      <p className="text-primary font-bold">S/ {totalVenta.toLocaleString("es-PE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     </div>
                   </div>
 
-                  {hcsEvent ? (
-                    <div className="mt-6 pt-4 border-t border-white/10">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="p-2 rounded-full bg-[#FBBF24]/20">
-                          <ExternalLink className="w-5 h-5 text-[#FBBF24]" />
-                        </div>
-                        <div>
-                          <h3 className="font-semibold text-[#F8FAFC]">Verificación en Cadena</h3>
-                          <p className="text-sm text-[#F8FAFC]/70">
-                            Esta venta fue registrada en Hedera Consensus Service
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="space-y-3">
-                        <div>
-                          <p className="text-sm font-medium text-[#F8FAFC]/90">ID de Transacción</p>
-                          <p className="text-xs font-mono text-[#F8FAFC]/70 break-all">
-                            {hcsEvent.transactionId}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-[#F8FAFC]/90">Timestamp de Consenso</p>
-                          <p className="text-xs font-mono text-[#F8FAFC]/70 break-all">
-                            {hcsEvent.consensusTimestamp}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-[#F8FAFC]/90">Tópico HCS</p>
-                          <p className="text-xs font-mono text-[#F8FAFC]/70">
-                            {hcsEvent.topicId}
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <a
-                            href={`https://hashscan.io/testnet/transaction/${encodeURIComponent(
-                              hcsEvent.transactionId
-                            )}`}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium bg-white/10 border border-white/20 rounded hover:bg-white/20 transition"
-                          >
-                            <ExternalLink className="w-4 h-4 mr-2" />
-                            Ver en HashScan
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="mt-4 p-4 bg-[#FBBF24]/10 border border-[#FBBF24]/30 rounded-lg">
-                      <p className="text-sm text-[#FBBF24]">
-                        Esperando confirmación de la red Hedera...
-                      </p>
-                    </div>
-                  )}
+                  {/* Right: HashScan Link */}
+                  <div className="flex items-center">
+                    {hcsEvent ? (
+                      <a
+                        href={`https://hashscan.io/testnet/transaction/${encodeURIComponent(hcsEvent.transactionId)}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-1 text-primary text-sm font-bold bg-primary/5 px-3 py-2 rounded-lg hover:bg-primary/10 transition-colors"
+                      >
+                        <span>Ver en HashScan</span>
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    ) : (
+                      <span className="text-secondary text-xs bg-surface-container-high px-3 py-2 rounded-lg flex items-center gap-1">
+                        <Clock className="w-4 h-4" />
+                        Confirmando...
+                      </span>
+                    )}
+                  </div>
                 </div>
-              ))}
+              );
+            })
+          )}
+
+          {/* End of List CTA */}
+          {salesWithHcs.length > 0 && (
+            <div className="flex flex-col items-center justify-center py-12 px-4 text-center border-2 border-dashed border-primary/20 rounded-2xl bg-primary/5 mt-4">
+              <div className="size-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
+                <PackageOpen className="w-8 h-8" />
+              </div>
+              <h4 className="text-foreground text-xl font-bold mb-2">Fin del historial</h4>
+              <p className="text-secondary max-w-sm mb-6">Todas tus transacciones son seguras y verificables mediante el ID de transacción de Hedera.</p>
+              <button
+                onClick={() => router.push("/registrar-venta")}
+                className="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-primary/90 transition-all flex items-center gap-2"
+              >
+                <PlusCircle className="w-5 h-5" />
+                Registrar nueva venta
+              </button>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </main>
 
-      <footer className="bg-[#0F0F23]/80 backdrop-blur-sm text-white text-center p-4">
-        <p className="text-sm text-[#F8FAFC]/70">
-          Cada venta tiene un registro inmutable verificable en HashScan
-        </p>
-      </footer>
+      {/* Mobile Navigation */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-surface-container border-t border-primary/10 py-3 px-6 md:hidden flex justify-around items-center z-50">
+        <button onClick={() => router.push("/")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
+          <Home className="w-5 h-5" />
+          <span className="text-[10px] font-bold">Inicio</span>
+        </button>
+        <button className="flex flex-col items-center gap-1 text-primary">
+          <Receipt className="w-5 h-5" />
+          <span className="text-[10px] font-bold">Ventas</span>
+        </button>
+        <button onClick={() => router.push("/consultar-precio")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
+          <Store className="w-5 h-5" />
+          <span className="text-[10px] font-bold">Mercado</span>
+        </button>
+        <button className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
+          <User className="w-5 h-5" />
+          <span className="text-[10px] font-bold">Perfil</span>
+        </button>
+      </nav>
+
+      {/* Bottom padding for mobile nav */}
+      <div className="h-20 md:hidden" />
     </div>
   );
 }
