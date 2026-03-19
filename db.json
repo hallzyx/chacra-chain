@@ -36,7 +36,6 @@
     }
   ],
   "sales": [
-    
     {
       "id": "e3028766-eecc-4b1d-8296-f00a90308852",
       "userId": "ea333441-7436-42c2-ac50-6e015282bf6b",
@@ -69,6 +68,28 @@
       "fechaTransaccion": "2026-03-19T16:43:08.283Z",
       "hcsEventId": "ec0965ab-8908-4ac2-97f4-24376d266ea3",
       "createdAt": "2026-03-19T16:43:28.042Z"
+    },
+    {
+      "id": "1aa7b673-e17f-4fd4-9721-5d5c13511439",
+      "userId": "8f1e0cb2-4516-4a89-9f44-25c41d8d4316",
+      "agricultorId": "AGR-2910",
+      "variedadCultivo": "Papa Canchan",
+      "cantidadKg": 10,
+      "precioUnitarioPen": 1.5,
+      "fechaTransaccion": "2026-03-19T23:04:28.595Z",
+      "hcsEventId": "a091e092-2294-4440-97bc-6f3c88a7bce0",
+      "createdAt": "2026-03-19T23:04:41.672Z"
+    },
+    {
+      "id": "a57cd943-75f2-41e2-8c97-3825c8d505d6",
+      "userId": "8f1e0cb2-4516-4a89-9f44-25c41d8d4316",
+      "agricultorId": "AGR-2910",
+      "variedadCultivo": "Papa Yungay",
+      "cantidadKg": 5,
+      "precioUnitarioPen": 1.4,
+      "fechaTransaccion": "2026-03-19T23:05:22.336Z",
+      "hcsEventId": "f6323a57-4f91-427e-94f4-3a0d7e5c1a6a",
+      "createdAt": "2026-03-19T23:05:36.772Z"
     }
   ],
   "hcsEvents": [
@@ -103,6 +124,22 @@
       "consensusTimestamp": "1@2026-03-19T16:43:28.037Z",
       "message": "{\"agricultor_id\":\"AGR-2910\",\"variedad_cultivo\":\"Papa Canchan\",\"cantidad_kg\":20,\"precio_unitario_pen\":1.5,\"fecha_transaccion\":\"2026-03-19T16:43:08.283Z\"}",
       "createdAt": "2026-03-19T16:43:28.042Z"
+    },
+    {
+      "id": "a091e092-2294-4440-97bc-6f3c88a7bce0",
+      "topicId": "0.0.8289429",
+      "transactionId": "0.0.8270077@1773961473.543948852",
+      "consensusTimestamp": "3@2026-03-19T23:04:41.669Z",
+      "message": "{\"agricultor_id\":\"AGR-2910\",\"variedad_cultivo\":\"Papa Canchan\",\"cantidad_kg\":10,\"precio_unitario_pen\":1.5,\"fecha_transaccion\":\"2026-03-19T23:04:28.595Z\"}",
+      "createdAt": "2026-03-19T23:04:41.672Z"
+    },
+    {
+      "id": "f6323a57-4f91-427e-94f4-3a0d7e5c1a6a",
+      "topicId": "0.0.8289429",
+      "transactionId": "0.0.8270077@1773961530.511338582",
+      "consensusTimestamp": "4@2026-03-19T23:05:36.769Z",
+      "message": "{\"agricultor_id\":\"AGR-2910\",\"variedad_cultivo\":\"Papa Yungay\",\"cantidad_kg\":5,\"precio_unitario_pen\":1.4,\"fecha_transaccion\":\"2026-03-19T23:05:22.336Z\"}",
+      "createdAt": "2026-03-19T23:05:36.772Z"
     }
   ],
   "sessions": [
