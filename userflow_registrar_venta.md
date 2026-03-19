@@ -39,7 +39,7 @@
    - Sistema: Muestra spinner "Registrando venta en cadena..."
 
 4. Backend recibe la solicitud
-   - Backend: Firma la transacción HCS con la cuenta custodial asociada al agricultor (o cuenta maestra)
+   - Backend: Firma la transacción HCS con la cuenta custodial asociada al agricultor
    - Backend: Envía la transacción a la red Hedera mediante @hashgraph/sdk
    - Hedera: Consenso alcanza en 2-3 segundos, asigna timestamp de consenso y ordena el mensaje
    - Nodo espejo: Almacena el mensaje y su timestamp de consenso

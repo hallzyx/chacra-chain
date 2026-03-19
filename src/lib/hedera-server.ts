@@ -6,6 +6,7 @@ import {
   PrivateKey,
   TopicMessageSubmitTransaction,
 } from "@hashgraph/sdk";
+import { decryptSensitiveValue } from "@/lib/auth";
 
 export interface CreatedHederaAccount {
   accountId: string;
@@ -74,30 +75,44 @@ export async function createHederaTestnetAccount(): Promise<CreatedHederaAccount
 }
 
 /**
- * Publishes a sale payload to Hedera Consensus Service.
+ * Publishes a sale payload to Hedera Consensus Service signed by the user's wallet.
  * @param messagePayload - Serialized JSON payload representing a sale.
+ * @param userAccountId - The user's Hedera account ID.
+ * @param userPrivateKey - The user's PrivateKey for signing.
  * @returns HCS submission metadata (transaction ID and consensus timestamp).
  * @throws {Error} When HEDERA_HCS_TOPIC_ID is not configured.
  */
-export async function submitSaleToHcs(messagePayload: string): Promise<SubmittedHcsMessage> {
+export async function submitSaleToHcs(
+  messagePayload: string,
+  userAccountId: string,
+  userPrivateKey: PrivateKey
+): Promise<SubmittedHcsMessage> {
   const topicId = process.env.HEDERA_HCS_TOPIC_ID;
   if (!topicId) {
     throw new Error("HEDERA_HCS_TOPIC_ID is required in env");
   }
 
-  const client = getServerHederaClient();
-  const response = await new TopicMessageSubmitTransaction()
-    .setTopicId(topicId)
-    .setMessage(messagePayload)
-    .execute(client);
+  // Create a client for this specific user (not the operator)
+  const client = Client.forTestnet();
+  client.setOperator(AccountId.fromString(userAccountId), userPrivateKey);
 
-  const receipt = await response.getReceipt(client);
+  try {
+    const response = await new TopicMessageSubmitTransaction()
+      .setTopicId(topicId)
+      .setMessage(messagePayload)
+      .execute(client);
 
-  return {
-    transactionId: response.transactionId.toString(),
-    consensusTimestamp: receipt.topicSequenceNumber
-      ? `${receipt.topicSequenceNumber.toString()}@${new Date().toISOString()}`
-      : new Date().toISOString(),
-    topicId,
-  };
+    const receipt = await response.getReceipt(client);
+
+    return {
+      transactionId: response.transactionId.toString(),
+      consensusTimestamp: receipt.topicSequenceNumber
+        ? `${receipt.topicSequenceNumber.toString()}@${new Date().toISOString()}`
+        : new Date().toISOString(),
+      topicId,
+    };
+  } finally {
+    // Always close the client to free resources
+    client.close();
+  }
 }

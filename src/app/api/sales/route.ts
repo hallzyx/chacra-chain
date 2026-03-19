@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAuthenticatedUser } from "@/lib/auth";
+import { getAuthenticatedUser, getUserWalletCredentials } from "@/lib/auth";
 import { makeId, readDb, writeDb } from "@/lib/db";
 import { submitSaleToHcs } from "@/lib/hedera-server";
 
@@ -41,7 +41,22 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     };
 
     const serializedPayload = JSON.stringify(payload);
-    const hcsResult = await submitSaleToHcs(serializedPayload);
+    
+    // Get user's wallet credentials to sign the HCS transaction
+    const walletCredentials = await getUserWalletCredentials(authUser.userId);
+    if (!walletCredentials) {
+      return NextResponse.json(
+        { error: "Wallet del usuario no encontrada" },
+        { status: 400 }
+      );
+    }
+
+    // Submit to HCS using user's wallet
+    const hcsResult = await submitSaleToHcs(
+      serializedPayload,
+      walletCredentials.accountId,
+      walletCredentials.privateKey
+    );
 
     const db = await readDb();
     const now = new Date().toISOString();

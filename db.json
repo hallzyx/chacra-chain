@@ -68,6 +68,17 @@
       "fechaTransaccion": "2026-03-18T10:00:00-05:00",
       "hcsEventId": "87de4a89-79e4-4a36-99a8-a635589e1b16",
       "createdAt": "2026-03-18T05:07:26.127Z"
+    },
+    {
+      "id": "eb83016e-016c-40f9-80e0-7e384ecefdce",
+      "userId": "8f1e0cb2-4516-4a89-9f44-25c41d8d4316",
+      "agricultorId": "AGR-2910",
+      "variedadCultivo": "Papa Canchan",
+      "cantidadKg": 20,
+      "precioUnitarioPen": 1.5,
+      "fechaTransaccion": "2026-03-19T16:43:08.283Z",
+      "hcsEventId": "ec0965ab-8908-4ac2-97f4-24376d266ea3",
+      "createdAt": "2026-03-19T16:43:28.042Z"
     }
   ],
   "hcsEvents": [
@@ -94,6 +105,14 @@
       "consensusTimestamp": "3@2026-03-18T05:07:26.126Z",
       "message": "{\"agricultor_id\":\"AGR-3701\",\"variedad_cultivo\":\"Papa Blanca\",\"cantidad_kg\":2000,\"precio_unitario_pen\":1.15,\"fecha_transaccion\":\"2026-03-18T10:00:00-05:00\"}",
       "createdAt": "2026-03-18T05:07:26.127Z"
+    },
+    {
+      "id": "ec0965ab-8908-4ac2-97f4-24376d266ea3",
+      "topicId": "0.0.8289429",
+      "transactionId": "0.0.8270077@1773938599.537206751",
+      "consensusTimestamp": "1@2026-03-19T16:43:28.037Z",
+      "message": "{\"agricultor_id\":\"AGR-2910\",\"variedad_cultivo\":\"Papa Canchan\",\"cantidad_kg\":20,\"precio_unitario_pen\":1.5,\"fecha_transaccion\":\"2026-03-19T16:43:08.283Z\"}",
+      "createdAt": "2026-03-19T16:43:28.042Z"
     }
   ],
   "sessions": [
@@ -145,6 +164,13 @@
       "token": "4c40d731dd47e294ac3d1b4243fe39944cb4690b75c18f510d734fd0b746de13",
       "createdAt": "2026-03-18T05:07:14.586Z",
       "expiresAt": "2026-03-25T05:07:14.597Z"
+    },
+    {
+      "id": "8fc7c0e9-4447-4290-9d06-6f70892bd5f8",
+      "userId": "8f1e0cb2-4516-4a89-9f44-25c41d8d4316",
+      "token": "b01555878f5c64eef9a8ced46cd82b7c9bea6694c1a76b9ec0960532c21264ff",
+      "createdAt": "2026-03-19T16:24:45.368Z",
+      "expiresAt": "2026-03-26T16:24:45.368Z"
     }
   ]
 }

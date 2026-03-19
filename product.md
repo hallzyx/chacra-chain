@@ -29,7 +29,6 @@ Los mensajes enviados al Hedera Consensus Service siguen esta estructura JSON es
   "variedad_cultivo": "Papa Canchan",
   "cantidad_kg": 5000,
   "precio_unitario_pen": 1.20,
-  "mercado_destino": "Mercado Mayorista Santa Anita",
   "fecha_transaccion": "2026-03-17T19:11:23-05:00"
 }
 ```

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CheckCircle, ExternalLink, Upload, XCircle } from "lucide-react";
 
@@ -28,10 +28,15 @@ export default function RegistrarVentaPage() {
 
   const variedades = ["Papa Canchan", "Papa Única", "Papa Yungay", "Papa Tomasa", "Otro"];
 
+  const isAuthChecked = useRef(false);
+
   /**
    * Loads authenticated user info and pre-fills agricultor ID.
    */
   useEffect(() => {
+    if (isAuthChecked.current) return;
+    isAuthChecked.current = true;
+
     const token = localStorage.getItem("chacrachain_token");
     const userRaw = localStorage.getItem("chacrachain_user");
 
