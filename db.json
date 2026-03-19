@@ -36,17 +36,7 @@
     }
   ],
   "sales": [
-    {
-      "id": "edb8332b-bd71-4e44-bb5f-ba4c5b84acfa",
-      "userId": "8f1e0cb2-4516-4a89-9f44-25c41d8d4316",
-      "agricultorId": "AGR-2910",
-      "variedadCultivo": "Papa Canchan",
-      "cantidadKg": 5000,
-      "precioUnitarioPen": 1.2,
-      "fechaTransaccion": "2026-03-17T19:11:23-05:00",
-      "hcsEventId": "9ef22c00-2e0b-49ea-b6cb-dde6ee66963d",
-      "createdAt": "2026-03-18T03:34:50.160Z"
-    },
+    
     {
       "id": "e3028766-eecc-4b1d-8296-f00a90308852",
       "userId": "ea333441-7436-42c2-ac50-6e015282bf6b",
