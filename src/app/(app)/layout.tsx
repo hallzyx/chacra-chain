@@ -133,7 +133,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </button>
           <div>
             <h1 className="font-bold text-foreground text-sm">ChacraChain</h1>
-            <p className="text-[10px] text-secondary uppercase tracking-wider">Hedera Mainnet</p>
+            <p className="text-[10px] text-secondary uppercase tracking-wider">Hedera</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -212,7 +212,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               {!isCollapsed && (
                 <div>
                   <h1 className="font-bold text-foreground text-sm">ChacraChain</h1>
-                  <p className="text-[10px] text-secondary uppercase tracking-wider">Hedera Mainnet</p>
+                  <p className="text-[10px] text-secondary uppercase tracking-wider">Hedera</p>
                 </div>
               )}
             </div>
