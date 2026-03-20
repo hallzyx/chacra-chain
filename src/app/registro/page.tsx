@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ShieldCheck, UserPlus } from "lucide-react";
 
@@ -14,6 +14,14 @@ export default function RegistroPage() {
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Redirect logged-in users to dashboard
+  useEffect(() => {
+    const token = localStorage.getItem("chacrachain_token");
+    if (token) {
+      router.replace("/dashboard");
+    }
+  }, [router]);
 
   /**
    * Submits account registration and stores session token in localStorage.
@@ -37,6 +45,7 @@ export default function RegistroPage() {
         error?: string;
         token?: string;
         user?: { agricultorId: string; email: string };
+        wallet?: { hederaAccountId?: string; publicKey?: string };
       };
 
       if (!response.ok || !data.token || !data.user) {
@@ -44,9 +53,16 @@ export default function RegistroPage() {
       }
 
       localStorage.setItem("chacrachain_token", data.token);
-      localStorage.setItem("chacrachain_user", JSON.stringify(data.user));
+      localStorage.setItem(
+        "chacrachain_user",
+        JSON.stringify({
+          ...data.user,
+          walletAddress: data.wallet?.hederaAccountId || "",
+          publicKey: data.wallet?.publicKey || "",
+        })
+      );
 
-      router.push("/");
+      router.push("/dashboard");
     } catch (submitError) {
       setError(submitError instanceof Error ? submitError.message : "Error desconocido");
     } finally {

@@ -49,6 +49,7 @@ export default function LoginPage() {
         error?: string;
         token?: string;
         user?: { agricultorId: string; email: string };
+        wallet?: { hederaAccountId?: string; publicKey?: string };
       };
 
       if (!response.ok || !data.token || !data.user) {
@@ -56,9 +57,16 @@ export default function LoginPage() {
       }
 
       localStorage.setItem("chacrachain_token", data.token);
-      localStorage.setItem("chacrachain_user", JSON.stringify(data.user));
+      localStorage.setItem(
+        "chacrachain_user",
+        JSON.stringify({
+          ...data.user,
+          walletAddress: data.wallet?.hederaAccountId || "",
+          publicKey: data.wallet?.publicKey || "",
+        })
+      );
 
-      router.push("/");
+      router.push("/dashboard");
     } catch (submitError) {
       setError(submitError instanceof Error ? submitError.message : "Error desconocido");
     } finally {

@@ -29,6 +29,14 @@ export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  // Redirect logged-in users to dashboard
+  useEffect(() => {
+    const token = localStorage.getItem("chacrachain_token");
+    if (token) {
+      router.replace("/dashboard");
+    }
+  }, [router]);
+
   // Track scroll for header styling
   useEffect(() => {
     const handleScroll = () => {

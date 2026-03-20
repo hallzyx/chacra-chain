@@ -29,19 +29,46 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [userName, setUserName] = useState<string>("Agricultor");
+  const [userEmail, setUserEmail] = useState<string>("");
+  const [walletAddress, setWalletAddress] = useState<string>("");
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   // Load user info on mount
   useEffect(() => {
     const userRaw = localStorage.getItem("chacrachain_user");
     if (userRaw) {
       try {
-        const user = JSON.parse(userRaw) as { agricultorId?: string; email?: string };
+        const user = JSON.parse(userRaw) as { 
+          agricultorId?: string; 
+          email?: string;
+          walletAddress?: string;
+        };
         setUserName(user.agricultorId || "Agricultor");
+        setUserEmail(user.email || "");
+        setWalletAddress(user.walletAddress || "");
       } catch {
         // ignore
       }
     }
   }, []);
+
+  // Close user menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isUserMenuOpen && !(event.target as Element).closest('.user-menu')) {
+        setIsUserMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isUserMenuOpen]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("chacrachain_token");
+    localStorage.removeItem("chacrachain_user");
+    setIsUserMenuOpen(false);
+    router.push("/login");
+  };
 
   // Don't show drawer on root route
   if (pathname === "/") {
@@ -119,7 +146,57 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
-      {/* SideNavBar Drawer */}
+      {/* Desktop Header */}
+      <header className="hidden lg:flex fixed top-0 right-0 h-16 bg-surface-container border-b border-outline-variant/10 items-center justify-end px-6 z-30" style={{ left: isCollapsed ? '5rem' : '16rem' }}>
+        <div className="flex items-center gap-4">
+          <button className="p-2 text-secondary hover:text-primary transition-colors">
+            <Bell className="w-5 h-5" />
+          </button>
+          <div className="relative user-menu">
+            <button
+              onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+              className="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container-high transition-colors"
+            >
+              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                <User className="w-4 h-4 text-white" />
+              </div>
+              <div className="text-left">
+                <p className="text-sm font-medium text-foreground">{userName}</p>
+                <p className="text-xs text-secondary">{userEmail}</p>
+              </div>
+              <svg
+                className={`w-4 h-4 text-secondary transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {isUserMenuOpen && (
+              <div className="absolute top-full right-0 mt-2 w-64 bg-surface-container border border-outline-variant/10 rounded-lg shadow-lg py-2 z-50">
+                {walletAddress ? (
+                  <div className="px-4 py-2 border-b border-outline-variant/10 mb-1">
+                    <p className="text-xs text-secondary mb-1">Wallet Address</p>
+                    <p className="text-xs font-mono text-foreground break-all">{walletAddress}</p>
+                  </div>
+                ) : (
+                  <div className="px-4 py-2 text-sm text-secondary border-b border-outline-variant/10 mb-1">
+                    Wallet no configurada
+                  </div>
+                )}
+                <button
+                  onClick={handleLogout}
+                  className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-500 hover:bg-red-50 transition-colors"
+                >
+                  <LogOut className="w-4 h-4" />
+                  Cerrar Sesión
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </header>
       <aside 
         className={`fixed left-0 top-0 h-screen bg-surface-container border-r border-outline-variant/10 flex flex-col transition-all duration-300 ease-in-out z-50 ${
           isCollapsed ? "w-20" : "w-64"

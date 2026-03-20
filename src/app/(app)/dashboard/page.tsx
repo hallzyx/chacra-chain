@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { 
   LayoutGrid,
   Home,
@@ -24,8 +25,36 @@ import {
   Search,
   Bell,
   Settings,
-  LogOut
+  LogOut,
+  Loader2
 } from "lucide-react";
+
+interface Sale {
+  id: string;
+  agricultorId: string;
+  variedadCultivo: string;
+  cantidadKg: number;
+  precioUnitarioPen: number;
+  fechaTransaccion: string;
+  hcsEventId: string;
+  createdAt: string;
+}
+
+// API returns { sales: [{ sale: {...}, hcsEvent: {...} }] }
+interface SaleWithHcs {
+  sale: Sale;
+  hcsEvent: {
+    id: string;
+    transactionId: string;
+    consensusTimestamp: string;
+  } | null;
+}
+
+interface DashboardStats {
+  totalKg: number;
+  totalVentas: number;
+  precioPromedio: number;
+}
 
 /**
  * Dashboard Panel de Control - Main landing page after login.
@@ -34,34 +63,84 @@ import {
  */
 export default function DashboardPage() {
   const router = useRouter();
+  const [sales, setSales] = useState<SaleWithHcs[]>([]);
+  const [stats, setStats] = useState<DashboardStats>({ totalKg: 0, totalVentas: 0, precioPromedio: 0 });
+  const [loading, setLoading] = useState(true);
+  const [userName, setUserName] = useState("Agricultor");
 
-  // Mock data for recent activity
-  const recentActivity = [
-    {
-      id: "T-982",
-      variedad: "Papa Amarilla",
-      cantidad: 5200,
-      precioTotal: 15080,
-      fecha: "Hace 2 horas",
-      tipo: "premium",
-    },
-    {
-      id: "T-981",
-      variedad: "Papa Canchan",
-      cantidad: 3150,
-      precioTotal: 7875,
-      fecha: "Ayer",
-      tipo: "estandar",
-    },
-    {
-      id: "T-980",
-      variedad: "Papa Huamantanga",
-      cantidad: 4100,
-      precioTotal: 12300,
-      fecha: "02 OCT",
-      tipo: "premium",
-    },
-  ];
+  // Fetch user sales and calculate stats
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("chacrachain_token");
+        const userRaw = localStorage.getItem("chacrachain_user");
+        
+        if (userRaw) {
+          const user = JSON.parse(userRaw);
+          setUserName(user.agricultorId || "Agricultor");
+        }
+
+        if (!token) {
+          router.push("/login");
+          return;
+        }
+
+        const response = await fetch("/api/user/sales", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.status === 401) {
+          localStorage.removeItem("chacrachain_token");
+          localStorage.removeItem("chacrachain_user");
+          router.push("/login");
+          return;
+        }
+
+        if (response.ok) {
+          const data = await response.json();
+          const userSales: SaleWithHcs[] = data.sales || [];
+          setSales(userSales);
+
+          // Extract actual sale data and calculate stats
+          const actualSales = userSales.map(item => item.sale);
+          const totalKg = actualSales.reduce((sum, s) => sum + (s.cantidadKg || 0), 0);
+          const totalVentas = actualSales.length;
+          const precioPromedio = actualSales.length > 0
+            ? actualSales.reduce((sum, s) => sum + (s.precioUnitarioPen || 0), 0) / actualSales.length
+            : 0;
+
+          setStats({ totalKg, totalVentas, precioPromedio });
+        }
+      } catch (error) {
+        console.error("Error fetching sales:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [router]);
+
+  // Format relative time
+  const formatRelativeTime = (dateString: string): string => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+
+    if (diffMins < 1) return "Hace un momento";
+    if (diffMins < 60) return `Hace ${diffMins} min`;
+    if (diffHours < 24) return `Hace ${diffHours} hora${diffHours > 1 ? 's' : ''}`;
+    if (diffDays < 7) return `Hace ${diffDays} día${diffDays > 1 ? 's' : ''}`;
+    return date.toLocaleDateString("es-PE", { day: "2-digit", month: "short" }).toUpperCase();
+  };
+
+  // Get top 5 recent sales
+  const recentSales = sales.slice(0, 5);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -99,7 +178,7 @@ export default function DashboardPage() {
         {/* Welcome Section */}
         <header className="mb-8">
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-secondary mb-2 block">Bienvenido de vuelta</span>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight leading-none">¡Hola, Agricultor!</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight leading-none">¡Hola, {userName}!</h1>
           <p className="mt-4 text-secondary max-w-xl leading-relaxed">
             Gestiona tus cosechas y asegura la transparencia de tus ventas en la red Hedera. 
             Cada registro es un paso hacia un mercado agrícola más justo.
@@ -109,17 +188,17 @@ export default function DashboardPage() {
         {/* Quick Stats Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           <div className="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 shadow-sm">
-            <p className="text-secondary font-medium text-xs uppercase tracking-wider mb-2">Ventas del mes (kg)</p>
+            <p className="text-secondary font-medium text-xs uppercase tracking-wider mb-2">Total Registrado (kg)</p>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-extrabold text-primary">12,450</span>
-              <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">+12%</span>
+              <span className="text-3xl font-extrabold text-primary">{stats.totalKg.toLocaleString("es-PE")}</span>
+              <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">kg</span>
             </div>
           </div>
 
           <div className="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 shadow-sm">
             <p className="text-secondary font-medium text-xs uppercase tracking-wider mb-2">Precio Promedio (S/.)</p>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-extrabold text-primary">2.85</span>
+              <span className="text-3xl font-extrabold text-primary">{stats.precioPromedio.toFixed(2)}</span>
               <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">S/./kg</span>
             </div>
           </div>
@@ -127,7 +206,7 @@ export default function DashboardPage() {
           <div className="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 shadow-sm">
             <p className="text-secondary font-medium text-xs uppercase tracking-wider mb-2">Transacciones</p>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-extrabold text-primary">48</span>
+              <span className="text-3xl font-extrabold text-primary">{stats.totalVentas}</span>
             </div>
           </div>
 
@@ -188,87 +267,66 @@ export default function DashboardPage() {
               <h3 className="text-2xl font-bold text-foreground">Actividad Reciente</h3>
               <p className="text-secondary text-sm">Registros inmutables en la cadena</p>
             </div>
-            <a className="text-primary font-bold text-sm hover:underline" href="#">Ver historial completo</a>
+            <button 
+              onClick={() => router.push("/mis-ventas")}
+              className="text-primary font-bold text-sm hover:underline"
+            >
+              Ver historial completo
+            </button>
           </div>
-          <div className="space-y-4">
-            {/* Activity Item 1 */}
-            <div className="bg-surface-container-low group hover:bg-white transition-colors p-5 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 border border-outline-variant/10">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center">
-                  <Sprout className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-foreground">Papa Amarilla • T-982</h4>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="bg-primary/10 text-primary text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">Premium</span>
-                    <span className="text-xs text-secondary font-medium">HACE 2 HORAS</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center justify-between md:justify-end gap-10">
-                <div className="text-right">
-                  <p className="text-lg font-bold text-primary">5,200 kg</p>
-                  <p className="text-xs text-secondary font-medium">S/. 14,820 total</p>
-                </div>
-                <div className="flex items-center gap-2 text-primary/40">
-                  <BadgeCheck className="w-4 h-4" />
-                  <span className="text-[10px] font-mono tracking-tighter hidden sm:block">0.0.12543...</span>
-                </div>
-              </div>
-            </div>
 
-            {/* Activity Item 2 */}
-            <div className="bg-surface-container-low group hover:bg-white transition-colors p-5 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 border border-outline-variant/10">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center">
-                  <Sprout className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-foreground">Papa Canchán • T-981</h4>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="bg-secondary/10 text-secondary text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">Estándar</span>
-                    <span className="text-xs text-secondary font-medium">AYER</span>
+          {loading ? (
+            <div className="flex items-center justify-center py-12">
+              <Loader2 className="w-8 h-8 text-primary animate-spin" />
+            </div>
+          ) : recentSales.length === 0 ? (
+            <div className="bg-surface-container-low p-8 rounded-xl border border-outline-variant/10 text-center">
+              <Sprout className="w-12 h-12 text-secondary/30 mx-auto mb-4" />
+              <p className="text-secondary font-medium">No tienes ventas registradas aún</p>
+              <p className="text-secondary/70 text-sm mt-1">Empieza registrando tu primera venta</p>
+              <button
+                onClick={() => router.push("/registrar-venta")}
+                className="mt-4 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 transition"
+              >
+                Registrar Venta
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {recentSales.map((saleWithHcs) => (
+                <div 
+                  key={saleWithHcs.sale.id}
+                  className="bg-surface-container-low group hover:bg-white transition-colors p-5 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 border border-outline-variant/10"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center">
+                      <Sprout className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-foreground">{saleWithHcs.sale.variedadCultivo}</h4>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="text-xs text-secondary font-medium">{formatRelativeTime(saleWithHcs.sale.createdAt)}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between md:justify-end gap-10">
+                    <div className="text-right">
+                      <p className="text-lg font-bold text-primary">{saleWithHcs.sale.cantidadKg.toLocaleString("es-PE")} kg</p>
+                      <p className="text-xs text-secondary font-medium">
+                        S/. {(saleWithHcs.sale.cantidadKg * saleWithHcs.sale.precioUnitarioPen).toFixed(2)} total
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2 text-primary/40">
+                      <BadgeCheck className="w-4 h-4" />
+                      <span className="text-[10px] font-mono tracking-tighter hidden sm:block">
+                        {saleWithHcs.sale.hcsEventId.slice(0, 8)}...
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="flex items-center justify-between md:justify-end gap-10">
-                <div className="text-right">
-                  <p className="text-lg font-bold text-primary">3,150 kg</p>
-                  <p className="text-xs text-secondary font-medium">S/. 7,875 total</p>
-                </div>
-                <div className="flex items-center gap-2 text-primary/40">
-                  <BadgeCheck className="w-4 h-4" />
-                  <span className="text-[10px] font-mono tracking-tighter hidden sm:block">0.0.12542...</span>
-                </div>
-              </div>
+              ))}
             </div>
-
-            {/* Activity Item 3 */}
-            <div className="bg-surface-container-low group hover:bg-white transition-colors p-5 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 border border-outline-variant/10">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center">
-                  <Sprout className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-foreground">Papa Huamantanga • T-980</h4>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="bg-primary/10 text-primary text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">Premium</span>
-                    <span className="text-xs text-secondary font-medium">02 OCT</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center justify-between md:justify-end gap-10">
-                <div className="text-right">
-                  <p className="text-lg font-bold text-primary">4,100 kg</p>
-                  <p className="text-xs text-secondary font-medium">S/. 12,300 total</p>
-                </div>
-                <div className="flex items-center gap-2 text-primary/40">
-                  <BadgeCheck className="w-4 h-4" />
-                  <span className="text-[10px] font-mono tracking-tighter hidden sm:block">0.0.12540...</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          )}
         </section>
       </main>
 
