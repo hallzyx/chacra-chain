@@ -28,7 +28,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [userName, setUserName] = useState<string>("Agricultor");
+  const [userName, setUserName] = useState<string>("Farmer");
   const [userEmail, setUserEmail] = useState<string>("");
   const [walletAddress, setWalletAddress] = useState<string>("");
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -43,7 +43,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           email?: string;
           walletAddress?: string;
         };
-        setUserName(user.agricultorId || "Agricultor");
+        setUserName(user.agricultorId || "Farmer");
         setUserEmail(user.email || "");
         setWalletAddress(user.walletAddress || "");
       } catch {
@@ -82,25 +82,25 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   const navItems = [
     { 
-      label: "Panel", 
+      label: "Dashboard", 
       icon: LayoutGrid, 
       href: "/dashboard",
       active: pathname === "/dashboard" 
     },
     { 
-      label: "Registrar", 
+      label: "Register", 
       icon: Sprout, 
       href: "/registrar-venta",
       active: pathname === "/registrar-venta" 
     },
     { 
-      label: "Precios", 
+      label: "Prices", 
       icon: TrendingUp, 
       href: "/consultar-precio",
       active: pathname === "/consultar-precio" 
     },
     { 
-      label: "Ventas", 
+      label: "Sales", 
       icon: Receipt, 
       href: "/mis-ventas",
       active: pathname === "/mis-ventas" 
@@ -108,8 +108,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   ];
 
   const bottomItems = [
-    { label: "Ajustes", icon: Settings, href: "/ajustes" },
-    { label: "Salir", icon: LogOut, href: "/login", danger: true },
+    { label: "Settings", icon: Settings, href: "/ajustes" },
+    { label: "Sign Out", icon: LogOut, href: "/login", danger: true },
   ];
 
   return (
@@ -182,7 +182,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   </div>
                 ) : (
                   <div className="px-4 py-2 text-sm text-secondary border-b border-outline-variant/10 mb-1">
-                    Wallet no configurada
+                    Wallet not configured
                   </div>
                 )}
                 <button
@@ -190,7 +190,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-500 hover:bg-red-50 transition-colors"
                 >
                   <LogOut className="w-4 h-4" />
-                  Cerrar Sesión
+                  Sign Out
                 </button>
               </div>
             )}
@@ -221,7 +221,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               onClick={() => setIsMobileOpen(false)}
               className="lg:hidden p-2 text-secondary hover:text-primary"
             >
-              <span className="sr-only">Cerrar</span>
+              <span className="sr-only">Close</span>
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -267,7 +267,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                 </svg>
-                <span className="text-sm font-medium">Colapsar</span>
+                <span className="text-sm font-medium">Collapse</span>
               </>
             )}
           </button>

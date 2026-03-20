@@ -82,19 +82,19 @@ export default function LandingPage() {
                 onClick={() => scrollToSection("features")}
                 className="text-sm font-medium text-[#42493e] hover:text-[#154212] transition-colors"
               >
-                Características
+                Features
               </button>
               <button
                 onClick={() => scrollToSection("how-it-works")}
                 className="text-sm font-medium text-[#42493e] hover:text-[#154212] transition-colors"
               >
-                Cómo funciona
+                How it works
               </button>
               <button
                 onClick={() => scrollToSection("technology")}
                 className="text-sm font-medium text-[#42493e] hover:text-[#154212] transition-colors"
               >
-                Tecnología
+                Technology
               </button>
             </nav>
 
@@ -104,13 +104,13 @@ export default function LandingPage() {
                 onClick={() => router.push("/login")}
                 className="px-4 py-2.5 text-sm font-medium text-[#154212] hover:text-[#2d5a27] transition-colors"
               >
-                Ingresar
+                Sign in
               </button>
               <button
                 onClick={() => router.push("/registro")}
                 className="px-5 py-2.5 bg-[#154212] text-white text-sm font-semibold rounded-xl hover:bg-[#2d5a27] transition-all hover:shadow-lg hover:shadow-[#154212]/20"
               >
-                Empezar gratis
+                Get started free
               </button>
             </div>
 
@@ -136,32 +136,32 @@ export default function LandingPage() {
                 onClick={() => scrollToSection("features")}
                 className="block w-full text-left py-2 text-[#42493e] font-medium"
               >
-                Características
+                Features
               </button>
               <button
                 onClick={() => scrollToSection("how-it-works")}
                 className="block w-full text-left py-2 text-[#42493e] font-medium"
               >
-                Cómo funciona
+                How it works
               </button>
               <button
                 onClick={() => scrollToSection("technology")}
                 className="block w-full text-left py-2 text-[#42493e] font-medium"
               >
-                Tecnología
+                Technology
               </button>
               <div className="pt-3 border-t border-[#e1e3e2] space-y-2">
                 <button
                   onClick={() => router.push("/login")}
                   className="block w-full py-2.5 text-center text-[#154212] font-medium"
                 >
-                  Ingresar
+                  Sign in
                 </button>
                 <button
                   onClick={() => router.push("/registro")}
                   className="block w-full py-2.5 bg-[#154212] text-white text-center font-semibold rounded-xl"
                 >
-                  Empezar gratis
+                  Get started free
                 </button>
               </div>
             </div>
@@ -185,21 +185,21 @@ export default function LandingPage() {
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#154212]/10 rounded-full mb-6">
                 <Sprout className="w-4 h-4 text-[#154212]" />
                 <span className="text-sm font-medium text-[#154212]">
-                  AgriTech Web3 para Perú
+                  AgriTech Web3 for Peru
                 </span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#191c1c] leading-tight tracking-tight mb-6">
                 ChacraChain
                 <span className="block text-[#154212] mt-2">
-                  El registro inmutable de tu cosecha
+                  The immutable record of your harvest
                 </span>
               </h1>
 
               <p className="text-lg text-[#42493e] leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
-                La primera plataforma Web3 para agricultores peruanos. Registra
-                tus ventas de forma inmutable y consulta precios promedio del
-                mercado en tiempo real.
+                The first Web3 platform for Peruvian farmers. Register
+                your sales immutably and check average market prices
+                in real time.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -207,14 +207,14 @@ export default function LandingPage() {
                   onClick={() => router.push("/registro")}
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#154212] text-white font-semibold rounded-xl hover:bg-[#2d5a27] transition-all hover:shadow-xl hover:shadow-[#154212]/20 group"
                 >
-                  Comenzar ahora
+                  Start now
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
                 <button
                   onClick={() => scrollToSection("features")}
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#f3f4f3] text-[#154212] font-semibold rounded-xl hover:bg-[#e7e8e7] transition-all border border-[#c2c9bb]"
                 >
-                  Ver demo
+                  View demo
                 </button>
               </div>
             </div>
@@ -229,7 +229,7 @@ export default function LandingPage() {
                       <Sprout className="w-6 h-6 text-[#154212]" />
                     </div>
                     <div>
-                      <p className="text-sm text-[#42493e]">Venta registrada</p>
+                      <p className="text-sm text-[#42493e]">Sale registered</p>
                       <p className="text-lg font-bold text-[#191c1c]">
                         Papa Canchan
                       </p>
@@ -239,13 +239,13 @@ export default function LandingPage() {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="bg-[#f3f4f3] rounded-xl p-4">
                       <p className="text-xs text-[#42493e] uppercase tracking-wide">
-                        Cantidad
+                         Quantity
                       </p>
                       <p className="text-xl font-bold text-[#191c1c]">5,000 kg</p>
                     </div>
                     <div className="bg-[#f3f4f3] rounded-xl p-4">
                       <p className="text-xs text-[#42493e] uppercase tracking-wide">
-                        Precio
+                         Price
                       </p>
                       <p className="text-xl font-bold text-[#154212]">
                         S/ 1.20
@@ -255,7 +255,7 @@ export default function LandingPage() {
 
                   <div className="flex items-center gap-2 text-sm text-[#154212]">
                     <CheckCircle className="w-4 h-4" />
-                    <span>Registrado en Hedera HCS</span>
+                    <span>Registered on Hedera HCS</span>
                   </div>
                 </div>
               </div>
@@ -276,15 +276,15 @@ export default function LandingPage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#154212]/10 rounded-full mb-6">
               <Database className="w-4 h-4 text-[#154212]" />
               <span className="text-sm font-medium text-[#154212]">
-                Tecnología Web3
+                 Web3 Technology
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#191c1c] mb-6">
-              Características principales
+               Key features
             </h2>
             <p className="text-lg text-[#42493e]">
-              Diseñado específicamente para productores agrícolas peruanos,
-              combinando la facilidad de uso Web2 con la seguridad Web3.
+               Designed specifically for Peruvian agricultural producers,
+               combining Web2 ease of use with Web3 security.
             </p>
           </div>
 
@@ -296,11 +296,11 @@ export default function LandingPage() {
                 <Shield className="w-7 h-7 text-white" />
               </div>
               <h3 className="text-xl font-bold text-[#191c1c] mb-3">
-                Registro Inmutable
+                 Immutable Records
               </h3>
               <p className="text-[#42493e] leading-relaxed">
-                Cada venta queda registrada permanentemente en Hedera
-                Hashgraph. Prueba criptográfica verificable por siempre.
+                 Every sale is permanently recorded on Hedera
+                 Hashgraph. Cryptographic proof verifiable forever.
               </p>
             </div>
 
@@ -310,11 +310,11 @@ export default function LandingPage() {
                 <TrendingUp className="w-7 h-7 text-white" />
               </div>
               <h3 className="text-xl font-bold text-[#191c1c] mb-3">
-                Oráculo de Precios
+                 Price Oracle
               </h3>
               <p className="text-[#42493e] leading-relaxed">
-                Consulta precios promedio del mercado basados en datos
-                históricos verificables. Toma decisiones informadas.
+                 Check average market prices based on
+                 verifiable historical data. Make informed decisions.
               </p>
             </div>
 
@@ -324,11 +324,11 @@ export default function LandingPage() {
                 <Wallet className="w-7 h-7 text-white" />
               </div>
               <h3 className="text-xl font-bold text-[#191c1c] mb-3">
-                Sin Friction Web3
+                 Frictionless Web3
               </h3>
               <p className="text-[#42493e] leading-relaxed">
-                No necesitas wallets ni frases semilla. Autenticación
-                tradicional con tecnología Web3 invisible.
+                 No wallets or seed phrases needed. Traditional
+                 authentication with invisible Web3 technology.
               </p>
             </div>
           </div>
@@ -341,11 +341,11 @@ export default function LandingPage() {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#191c1c] mb-6">
-              ¿Cómo funciona?
+               How does it work?
             </h2>
             <p className="text-lg text-[#42493e]">
-              Tres simples pasos para empezar a registrar tus ventas de forma
-              inmutable.
+               Three simple steps to start recording your sales
+               immutably.
             </p>
           </div>
 
@@ -358,11 +358,11 @@ export default function LandingPage() {
               </div>
               <div className="absolute top-10 left-1/2 w-full h-0.5 bg-[#c2c9bb] hidden md:block -z-10" />
               <h3 className="text-xl font-bold text-[#191c1c] mb-3">
-                Registra tu venta
+                 Register your sale
               </h3>
               <p className="text-[#42493e]">
-                Completa los datos de tu transacción agrícola: variedad de papa,
-                cantidad, precio y fecha.
+                 Fill in your agricultural transaction details: potato variety,
+                 quantity, price, and date.
               </p>
             </div>
 
@@ -373,11 +373,11 @@ export default function LandingPage() {
               </div>
               <div className="absolute top-10 left-1/2 w-full h-0.5 bg-[#c2c9bb] hidden md:block -z-10" />
               <h3 className="text-xl font-bold text-[#191c1c] mb-3">
-                Se guarda en Hedera
+                 Stored on Hedera
               </h3>
               <p className="text-[#42493e]">
-                La información se registra inmutablemente en Hedera
-                Consensus Service con timestamp criptográfico.
+                 Information is immutably recorded in Hedera
+                 Consensus Service with cryptographic timestamp.
               </p>
             </div>
 
@@ -387,11 +387,11 @@ export default function LandingPage() {
                 <TrendingUp className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-[#191c1c] mb-3">
-                Consulta cuando quieras
+                 Check anytime
               </h3>
               <p className="text-[#42493e]">
-                Accede a tu historial completo y consulta precios de mercado
-                actualizados en tiempo real.
+                 Access your complete history and check market prices
+                 updated in real time.
               </p>
             </div>
           </div>
@@ -415,33 +415,33 @@ export default function LandingPage() {
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full mb-6">
                 <Shield className="w-4 h-4 text-[#a1d494]" />
                 <span className="text-sm font-medium text-[#a1d494]">
-                  Tecnología Empresarial
+                   Enterprise Technology
                 </span>
               </div>
 
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-                Respaldado por Hedera Hashgraph
+                 Powered by Hedera Hashgraph
               </h2>
 
               <p className="text-lg text-[#a1d494] leading-relaxed mb-8">
-                Utilizamos Hedera Consensus Service (HCS) para garantizar la
-                inmutabilidad de tus registros. Costos microscópicos ($0.0001 USD
-                por mensaje), finalidad casi instantánea (2-3 segundos) y consenso
-                verificado por 24 nodos globales.
+                 We use Hedera Consensus Service (HCS) to guarantee the
+                 immutability of your records. Microscopic costs ($0.0001 USD
+                 per message), near-instant finality (2-3 seconds), and consensus
+                 verified by 24 global nodes.
               </p>
 
               <div className="grid sm:grid-cols-3 gap-4">
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4">
                   <p className="text-2xl font-bold text-white">$0.0001</p>
-                  <p className="text-sm text-[#a1d494]">Costo por mensaje</p>
+                   <p className="text-sm text-[#a1d494]">Cost per message</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4">
                   <p className="text-2xl font-bold text-white">2-3s</p>
-                  <p className="text-sm text-[#a1d494]">Finalidad</p>
+                   <p className="text-sm text-[#a1d494]">Finality</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4">
                   <p className="text-2xl font-bold text-white">24</p>
-                  <p className="text-sm text-[#a1d494]">Nodos globales</p>
+                   <p className="text-sm text-[#a1d494]">Global nodes</p>
                 </div>
               </div>
             </div>
@@ -486,7 +486,7 @@ export default function LandingPage() {
                   <div className="flex items-center gap-2 pt-4 border-t border-[#e1e3e2]">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
                     <span className="text-xs text-[#154212] font-medium">
-                      Consenso alcanzado en 2.3 segundos
+                       Consensus reached in 2.3 seconds
                     </span>
                   </div>
                 </div>
@@ -509,12 +509,12 @@ export default function LandingPage() {
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-bold text-[#191c1c] mb-4">
-              Únete a la revolución agrícola digital
+               Join the digital agricultural revolution
             </h2>
 
             <p className="text-lg text-[#42493e] mb-8 max-w-2xl mx-auto">
-              Sé parte de la primera red de agricultores peruanos con registro
-              inmutable de transacciones. Empieza gratis hoy mismo.
+               Be part of the first network of Peruvian farmers with
+               immutable transaction records. Start free today.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -522,18 +522,18 @@ export default function LandingPage() {
                 onClick={() => router.push("/registro")}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#154212] text-white font-semibold rounded-xl hover:bg-[#2d5a27] transition-all hover:shadow-xl hover:shadow-[#154212]/20 group"
               >
-                Crear cuenta gratuita
+                 Create free account
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
 
             <p className="mt-6 text-sm text-[#42493e]">
-              ¿Ya tienes cuenta?{" "}
+               Already have an account?{" "}
               <button
                 onClick={() => router.push("/login")}
                 className="text-[#154212] font-semibold hover:underline"
               >
-                Ingresa aquí
+                 Sign in here
               </button>
             </p>
           </div>
@@ -553,21 +553,21 @@ export default function LandingPage() {
                 <span className="text-xl font-bold">ChacraChain</span>
               </Link>
               <p className="text-[#a1d494] text-sm leading-relaxed">
-                La primera plataforma Web3 para agricultores peruanos.
-                Registros inmutables en Hedera Hashgraph.
+                 The first Web3 platform for Peruvian farmers.
+                 Immutable records on Hedera Hashgraph.
               </p>
             </div>
 
             {/* Links */}
             <div>
-              <h4 className="font-semibold mb-4 text-white">Plataforma</h4>
+               <h4 className="font-semibold mb-4 text-white">Platform</h4>
               <ul className="space-y-3">
                 <li>
                   <button
                     onClick={() => scrollToSection("features")}
                     className="text-[#a1d494] hover:text-white transition-colors text-sm"
                   >
-                    Características
+                     Features
                   </button>
                 </li>
                 <li>
@@ -575,7 +575,7 @@ export default function LandingPage() {
                     onClick={() => scrollToSection("how-it-works")}
                     className="text-[#a1d494] hover:text-white transition-colors text-sm"
                   >
-                    Cómo funciona
+                     How it works
                   </button>
                 </li>
                 <li>
@@ -583,21 +583,21 @@ export default function LandingPage() {
                     onClick={() => scrollToSection("technology")}
                     className="text-[#a1d494] hover:text-white transition-colors text-sm"
                   >
-                    Tecnología
+                     Technology
                   </button>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4 text-white">Aplicación</h4>
+               <h4 className="font-semibold mb-4 text-white">Application</h4>
               <ul className="space-y-3">
                 <li>
                   <Link
                     href="/registrar-venta"
                     className="text-[#a1d494] hover:text-white transition-colors text-sm"
                   >
-                    Registrar venta
+                     Register sale
                   </Link>
                 </li>
                 <li>
@@ -605,7 +605,7 @@ export default function LandingPage() {
                     href="/consultar-precio"
                     className="text-[#a1d494] hover:text-white transition-colors text-sm"
                   >
-                    Consultar precios
+                     Check prices
                   </Link>
                 </li>
                 <li>
@@ -613,19 +613,19 @@ export default function LandingPage() {
                     href="/mis-ventas"
                     className="text-[#a1d494] hover:text-white transition-colors text-sm"
                   >
-                    Mis ventas
+                     My sales
                   </Link>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4 text-white">Contacto</h4>
+               <h4 className="font-semibold mb-4 text-white">Contact</h4>
               <ul className="space-y-3">
                 <li className="text-[#a1d494] text-sm">
                   contacto@chacra.chain
                 </li>
-                <li className="text-[#a1d494] text-sm">Lima, Perú</li>
+                 <li className="text-[#a1d494] text-sm">Lima, Peru</li>
               </ul>
               <div className="flex gap-4 mt-4">
                 <a
@@ -641,7 +641,7 @@ export default function LandingPage() {
           {/* Bottom Bar */}
           <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-[#a1d494] text-sm">
-              © 2026 ChacraChain. Todos los derechos reservados.
+               © 2026 ChacraChain. All rights reserved.
             </p>
             <div className="flex items-center gap-2 text-[#a1d494] text-sm">
               <span>Powered by</span>

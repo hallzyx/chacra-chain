@@ -98,7 +98,7 @@ export default function RegistrarVentaPage() {
     setErrorMessage(null);
 
     if (!formData.variedadCultivo || !formData.cantidadKg || !formData.precioUnitarioPen || !formData.fechaTransaccion) {
-      setErrorMessage("Por favor completa todos los campos");
+      setErrorMessage("Please complete all fields");
       return;
     }
 
@@ -108,7 +108,7 @@ export default function RegistrarVentaPage() {
     try {
       const token = localStorage.getItem("chacrachain_token");
       if (!token) {
-        throw new Error("No hay sesión activa. Iniciá sesión nuevamente.");
+        throw new Error("No active session. Please sign in again.");
       }
 
       const response = await fetch("/api/sales", {
@@ -132,7 +132,7 @@ export default function RegistrarVentaPage() {
       };
 
       if (!response.ok || !data.hcs) {
-        throw new Error(data.error ?? "No se pudo registrar la venta en HCS");
+        throw new Error(data.error ?? "Could not register the sale on HCS");
       }
 
       setTxHash(data.hcs.transactionId);
@@ -140,7 +140,7 @@ export default function RegistrarVentaPage() {
       setHashscanUrl(data.hashscanUrl ?? null);
       setSubmitStatus("success");
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Error desconocido";
+      const message = error instanceof Error ? error.message : "Unknown error";
       setErrorMessage(message);
       setSubmitStatus("error");
     } finally {
@@ -175,7 +175,7 @@ export default function RegistrarVentaPage() {
             <Sprout className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Registrar Venta</h2>
+            <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Register Sale</h2>
             <p className="text-primary/70 text-xs font-medium">ChacraChain x Hedera</p>
           </div>
         </div>
@@ -184,7 +184,7 @@ export default function RegistrarVentaPage() {
           className="flex items-center justify-center rounded h-10 bg-primary/10 text-primary hover:bg-primary/20 transition-all px-4 gap-2 text-sm font-bold"
         >
           <ArrowLeft className="w-5 h-5" />
-          <span>Volver</span>
+          <span>Back</span>
         </button>
       </header>
 
@@ -192,10 +192,10 @@ export default function RegistrarVentaPage() {
       <main className="flex-1 px-4 md:px-10 py-6 max-w-6xl mx-auto w-full">
         {/* Header Section */}
         <header className="mb-8">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-secondary mb-2 block">Nueva Transacción</span>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight leading-none">Registro de Venta</h1>
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-secondary mb-2 block">New Transaction</span>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight leading-none">Sale Registration</h1>
           <p className="mt-4 text-secondary max-w-xl leading-relaxed">
-            Inmortaliza tu cosecha en el libro mayor de Hedera. Cada registro genera un certificado de origen transparente para el mercado global.
+            Record your harvest on the Hedera ledger. Every entry creates a transparent certificate of origin for the global market.
           </p>
         </header>
 
@@ -210,8 +210,8 @@ export default function RegistrarVentaPage() {
                     <CheckCircle className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-foreground">¡Venta registrada en cadena!</h3>
-                    <p className="text-sm text-secondary">Transacción confirmada en Hedera Consensus Service</p>
+                    <h3 className="text-lg font-bold text-foreground">Sale registered on-chain!</h3>
+                    <p className="text-sm text-secondary">Transaction confirmed on Hedera Consensus Service</p>
                   </div>
                 </div>
                 
@@ -233,7 +233,7 @@ export default function RegistrarVentaPage() {
                     rel="noreferrer"
                     className="mt-6 inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
                   >
-                    Ver en HashScan <ExternalLink className="w-4 h-4" />
+                     View on HashScan <ExternalLink className="w-4 h-4" />
                   </a>
                 )}
 
@@ -241,7 +241,7 @@ export default function RegistrarVentaPage() {
                   onClick={resetForm}
                   className="mt-6 w-full bg-primary text-white px-6 py-3 rounded-xl font-bold hover:bg-primary/90 transition"
                 >
-                  Registrar otra venta
+                   Register another sale
                 </button>
               </div>
             ) : (
@@ -249,17 +249,17 @@ export default function RegistrarVentaPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Agricultor ID */}
                   <div className="space-y-2">
-                    <label className="block text-xs font-bold text-secondary uppercase tracking-wider">Agricultor ID</label>
+                    <label className="block text-xs font-bold text-secondary uppercase tracking-wider">Farmer ID</label>
                     <div className="bg-surface-container-low px-4 py-3 rounded-lg text-foreground font-mono text-sm border-l-4 border-primary">
-                      {formData.agricultorId || "Cargando..."}
+                      {formData.agricultorId || "Loading..."}
                     </div>
                   </div>
 
                   {/* Fecha */}
                   <div className="space-y-2">
-                    <label className="block text-xs font-bold text-secondary uppercase tracking-wider">Fecha de Registro</label>
+                    <label className="block text-xs font-bold text-secondary uppercase tracking-wider">Registration Date</label>
                     <div className="bg-surface-container-low px-4 py-3 rounded-lg text-foreground font-medium text-sm">
-                      {new Date().toLocaleDateString("es-PE", { 
+                      {new Date().toLocaleDateString("en-US", { 
                         year: "numeric", 
                         month: "long", 
                         day: "numeric" 
@@ -269,14 +269,14 @@ export default function RegistrarVentaPage() {
 
                   {/* Variedad */}
                   <div className="md:col-span-2 space-y-2">
-                    <label className="block text-xs font-bold text-secondary uppercase tracking-wider">Variedad de Cultivo</label>
+                    <label className="block text-xs font-bold text-secondary uppercase tracking-wider">Crop Variety</label>
                     <select
                       value={formData.variedadCultivo}
                       onChange={(e) => setFormData({ ...formData, variedadCultivo: e.target.value })}
                       className="w-full bg-surface-container-high border-0 focus:ring-1 focus:ring-primary rounded-lg py-4 px-4 text-foreground font-semibold appearance-none cursor-pointer"
                       required
                     >
-                      <option value="">Selecciona una variedad</option>
+                      <option value="">Select a variety</option>
                       {variedades.map((variedad) => (
                         <option key={variedad} value={variedad}>
                           {variedad}
@@ -287,7 +287,7 @@ export default function RegistrarVentaPage() {
 
                   {/* Cantidad */}
                   <div className="space-y-2">
-                    <label className="block text-xs font-bold text-secondary uppercase tracking-wider">Cantidad (kg)</label>
+                    <label className="block text-xs font-bold text-secondary uppercase tracking-wider">Quantity (kg)</label>
                     <div className="relative">
                       <input
                         type="number"
@@ -305,7 +305,7 @@ export default function RegistrarVentaPage() {
 
                   {/* Precio */}
                   <div className="space-y-2">
-                    <label className="block text-xs font-bold text-secondary uppercase tracking-wider">Precio Unitario (S/.)</label>
+                    <label className="block text-xs font-bold text-secondary uppercase tracking-wider">Unit Price (S/.)</label>
                     <div className="relative">
                       <span className="absolute left-4 top-1/2 -translate-y-1/2 text-primary font-bold">S/.</span>
                       <input
@@ -325,7 +325,7 @@ export default function RegistrarVentaPage() {
                 {/* Info Message */}
                 <div className="text-sm text-secondary bg-surface-container-low p-4 rounded-lg flex items-start gap-3">
                   <Info className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                  <p>Los datos se enviarán como mensaje real a Hedera Consensus Service. Una vez confirmado, la transacción será inmutable y verificable.</p>
+                  <p>The data will be sent as a real message to Hedera Consensus Service. Once confirmed, the transaction will be immutable and verifiable.</p>
                 </div>
 
                 {/* Status Messages */}
@@ -333,7 +333,7 @@ export default function RegistrarVentaPage() {
                   <div className="bg-primary/10 border border-primary/20 rounded-xl p-4">
                     <div className="flex items-center">
                       <Upload className="w-5 h-5 mr-3 text-primary animate-pulse" />
-                      <span className="text-foreground font-medium">Registrando venta en cadena...</span>
+                       <span className="text-foreground font-medium">Registering sale on-chain...</span>
                     </div>
                   </div>
                 )}
@@ -356,12 +356,12 @@ export default function RegistrarVentaPage() {
                   {isSubmitting ? (
                     <>
                       <Upload className="w-5 h-5 animate-spin" />
-                      <span>Enviando...</span>
+                       <span>Sending...</span>
                     </>
                   ) : (
                     <>
                       <CheckCircle className="w-5 h-5" />
-                      <span>Confirmar Registro en Cadena</span>
+                       <span>Confirm On-Chain Registration</span>
                     </>
                   )}
                 </button>
@@ -375,19 +375,19 @@ export default function RegistrarVentaPage() {
             <div className="bg-surface-container-low rounded-xl p-6 border border-outline-variant/10">
               <h3 className="text-sm font-bold text-primary mb-4 flex items-center gap-2">
                 <Hash className="w-4 h-4" />
-                Protocolo de Red
+                Network Protocol
               </h3>
               <div className="space-y-4">
                 <div className="flex justify-between items-center text-xs">
-                  <span className="text-secondary">Red</span>
+                   <span className="text-secondary">Network</span>
                   <span className="font-bold text-foreground">Hedera Testnet</span>
                 </div>
                 <div className="flex justify-between items-center text-xs">
-                  <span className="text-secondary">Fee Estimado</span>
+                   <span className="text-secondary">Estimated Fee</span>
                   <span className="font-bold text-primary">~0.001 HBAR</span>
                 </div>
                 <div className="flex justify-between items-center text-xs">
-                  <span className="text-secondary">Tiempo Finalidad</span>
+                   <span className="text-secondary">Finality Time</span>
                   <span className="font-bold text-foreground">&lt; 5s</span>
                 </div>
               </div>
@@ -398,13 +398,13 @@ export default function RegistrarVentaPage() {
               <div className="relative z-10">
                 <div className="flex items-center gap-2 mb-2">
                   <TrendingUp className="w-5 h-5" />
-                  <h3 className="text-lg font-bold">Precio Sugerido</h3>
+                  <h3 className="text-lg font-bold">Suggested Price</h3>
                 </div>
                 <p className="text-3xl font-black mb-1">S/ {getPrecioSugerido().toFixed(2)}</p>
                 <p className="text-[10px] opacity-70 uppercase font-bold">
                   {formData.variedadCultivo 
-                    ? `Basado en Oráculo - ${formData.variedadCultivo}` 
-                    : "Selecciona una variedad para ver el precio"}
+                    ? `Oracle-based - ${formData.variedadCultivo}` 
+                    : "Select a variety to view the price"}
                 </p>
               </div>
               <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform">
@@ -416,10 +416,10 @@ export default function RegistrarVentaPage() {
             <div className="bg-secondary/10 rounded-xl p-6 border border-secondary/20">
               <h3 className="text-xs font-bold uppercase mb-3 text-secondary flex items-center gap-2">
                 <Info className="w-4 h-4" />
-                Guía de Calidad
+                Quality Guide
               </h3>
               <p className="text-xs leading-relaxed text-secondary">
-                Asegúrese de que el peso registrado coincida con el ticket de pesaje digital para evitar discrepancias en la auditoría de la cadena de suministro.
+                Ensure the registered weight matches the digital weighing ticket to avoid discrepancies in supply chain audits.
               </p>
             </div>
           </aside>
@@ -430,19 +430,19 @@ export default function RegistrarVentaPage() {
       <nav className="fixed bottom-0 left-0 right-0 bg-surface-container border-t border-primary/10 py-3 px-6 md:hidden flex justify-around items-center z-50">
         <button onClick={() => router.push("/")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <Home className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Inicio</span>
+          <span className="text-[10px] font-bold">Home</span>
         </button>
         <button onClick={() => router.push("/mis-ventas")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <Receipt className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Ventas</span>
+          <span className="text-[10px] font-bold">Sales</span>
         </button>
         <button className="flex flex-col items-center gap-1 text-primary">
           <Sprout className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Registrar</span>
+          <span className="text-[10px] font-bold">Register</span>
         </button>
         <button className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <User className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Perfil</span>
+          <span className="text-[10px] font-bold">Profile</span>
         </button>
       </nav>
 

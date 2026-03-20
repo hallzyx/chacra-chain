@@ -15,8 +15,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ChacraChain - Mis Ventas",
-  description: "Registra y consulta tus ventas agrícolas verificadas en Hedera Consensus Service",
+  title: "ChacraChain - My Sales",
+  description: "Register and query your agricultural sales verified on Hedera Consensus Service",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
+    <html lang="en">
       <head>
         <link
           rel="stylesheet"

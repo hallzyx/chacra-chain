@@ -19,13 +19,13 @@ export async function POST(request: Request): Promise<NextResponse> {
     const password = body.password ?? "";
 
     if (!email || !password) {
-      return NextResponse.json({ error: "Email y contraseña son obligatorios" }, { status: 400 });
+      return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
     }
 
     const db = await readDb();
     const user = db.users.find((item) => item.email === email);
     if (!user || !verifyPassword(password, user.passwordHash)) {
-      return NextResponse.json({ error: "Credenciales inválidas" }, { status: 401 });
+      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
 
     const token = createSessionToken();
@@ -56,7 +56,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       },
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Error interno";
+    const message = error instanceof Error ? error.message : "Internal error";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

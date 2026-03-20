@@ -11,7 +11,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     const authUser = await getAuthenticatedUser(request);
     if (!authUser) {
-      return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const db = await readDb();
@@ -32,7 +32,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     return NextResponse.json({ sales: salesWithHcs });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Error interno";
+    const message = error instanceof Error ? error.message : "Internal error";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

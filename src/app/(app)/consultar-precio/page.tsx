@@ -49,9 +49,9 @@ export default function ConsultarPrecioPage() {
   const router = useRouter();
   
   const dateRangeOptions: DateRangeConfig[] = [
-    { label: "Últimos 30 días", value: "30d", days: 30 },
-    { label: "Última semana", value: "7d", days: 7 },
-    { label: "Último día", value: "1d", days: 1 },
+    { label: "Last 30 days", value: "30d", days: 30 },
+    { label: "Last week", value: "7d", days: 7 },
+    { label: "Last day", value: "1d", days: 1 },
   ];
   
   const [selectedDateRange, setSelectedDateRange] = useState<DateRangeOption>("30d");
@@ -80,7 +80,7 @@ export default function ConsultarPrecioPage() {
     { day: "15 Oct", price: 1.14 },
     { day: "16 Oct", price: 1.21 },
     { day: "17 Oct", price: 1.19 },
-    { day: "Hoy", price: priceData.averagePrice || 1.20 },
+     { day: "Today", price: priceData.averagePrice || 1.20 },
   ];
 
   const trendPercent = 2.4; // Mock positive trend
@@ -130,7 +130,7 @@ export default function ConsultarPrecioPage() {
         };
 
         if (!response.ok) {
-          throw new Error(data.error ?? "Error al consultar precio");
+          throw new Error(data.error ?? "Error checking price");
         }
 
         setPriceData({
@@ -144,7 +144,7 @@ export default function ConsultarPrecioPage() {
         setPriceData((prev) => ({
           ...prev,
           loading: false,
-          error: error instanceof Error ? error.message : "Error al obtener datos",
+          error: error instanceof Error ? error.message : "Error fetching data",
         }));
       }
     };
@@ -186,7 +186,7 @@ export default function ConsultarPrecioPage() {
               <TrendingUp className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Oráculo de Precios</h2>
+              <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Price Oracle</h2>
               <p className="text-primary/70 text-xs font-medium">ChacraChain x Hedera</p>
             </div>
           </div>
@@ -197,7 +197,7 @@ export default function ConsultarPrecioPage() {
             <div className="size-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4 animate-pulse">
               <RefreshCw className="w-8 h-8 animate-spin" />
             </div>
-            <p className="text-foreground/60 text-center">Consultando precios del mercado...</p>
+            <p className="text-foreground/60 text-center">Checking market prices...</p>
           </div>
         </main>
       </div>
@@ -213,7 +213,7 @@ export default function ConsultarPrecioPage() {
               <TrendingUp className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Oráculo de Precios</h2>
+              <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Price Oracle</h2>
               <p className="text-primary/70 text-xs font-medium">ChacraChain x Hedera</p>
             </div>
           </div>
@@ -223,7 +223,7 @@ export default function ConsultarPrecioPage() {
           <div className="bg-red-500/10 border border-red-500/30 text-red-600 px-6 py-4 rounded-xl text-center">
             <div className="flex items-center justify-center mb-2">
               <span className="mr-2">⚠️</span>
-              <p className="font-medium">Error al consultar precios</p>
+               <p className="font-medium">Error checking prices</p>
             </div>
             <p className="text-sm mt-1 text-red-600/70">{priceData.error}</p>
           </div>
@@ -241,7 +241,7 @@ export default function ConsultarPrecioPage() {
             <TrendingUp className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Oráculo de Precios</h2>
+            <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Price Oracle</h2>
             <p className="text-primary/70 text-xs font-medium">ChacraChain x Hedera</p>
           </div>
         </div>
@@ -250,7 +250,7 @@ export default function ConsultarPrecioPage() {
           className="flex items-center justify-center rounded h-10 bg-primary/10 text-primary hover:bg-primary/20 transition-all px-4 gap-2 text-sm font-bold"
         >
           <ArrowLeft className="w-5 h-5" />
-          <span>Volver</span>
+          <span>Back</span>
         </button>
       </header>
 
@@ -261,22 +261,22 @@ export default function ConsultarPrecioPage() {
           {/* Large Price Cluster */}
           <div className="lg:col-span-7 bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10 flex flex-col justify-between">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-secondary mb-2 block">Precio Promedio Actual</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-secondary mb-2 block">Current Average Price</span>
               <div className="flex items-baseline gap-2">
                 <h3 className="text-5xl md:text-7xl font-extrabold text-primary tracking-tighter">
                   S/ {priceData.averagePrice?.toFixed(2) ?? "0.00"}
                 </h3>
-                <span className="text-xl md:text-2xl font-medium text-stone-400">por kg</span>
+                  <span className="text-xl md:text-2xl font-medium text-stone-400">per kg</span>
               </div>
               <p className="mt-4 text-stone-500 text-sm flex items-center gap-2">
                 <History className="w-4 h-4" />
-                Basado en {priceData.recordCount} registros verificados en la red Hedera
+                 Based on {priceData.recordCount} verified records on the Hedera network
               </p>
             </div>
             <div className="mt-8 p-4 bg-surface-container-low rounded-lg flex items-start gap-4">
               <BadgeCheck className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
               <p className="text-xs text-secondary leading-relaxed">
-                Este precio es el promedio ponderado de todas las ventas verificadas en la red Hedera. Los datos son inmutables y transparentes.
+                 This price is the weighted average of all verified sales on the Hedera network. Data is immutable and transparent.
               </p>
             </div>
           </div>
@@ -286,20 +286,20 @@ export default function ConsultarPrecioPage() {
             <div className="bg-surface-container-low p-6 rounded-xl flex flex-col gap-4">
               <h4 className="text-sm font-bold text-foreground flex items-center gap-2">
                 <Filter className="w-4 h-4" />
-                Configuración de Consulta <span className="text-secondary font-normal text-xs">(opcional)</span>
+                 Query Settings <span className="text-secondary font-normal text-xs">(optional)</span>
               </h4>
               
               <div className="space-y-3">
                 {/* Variedad */}
                 <div>
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-1 block">Variedad</label>
+                   <label className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-1 block">Variety</label>
                   <select
                     name="variedadCultivo"
                     value={filters.variedadCultivo}
                     onChange={handleFilterChange}
                     className="w-full bg-surface-container-lowest border-0 rounded-lg text-sm font-medium focus:ring-1 focus:ring-primary h-11 px-4"
                   >
-                    <option value="">Todas las variedades</option>
+                     <option value="">All varieties</option>
                     {variedades.slice(1).map((variedad) => (
                       <option key={variedad} value={variedad}>
                         {variedad}
@@ -311,7 +311,7 @@ export default function ConsultarPrecioPage() {
                 {/* Rango de Fecha - Nuevo Selector */}
                 <div>
                   <label className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-1 block">
-                    Rango de Fecha
+                     Date Range
                   </label>
                   <div className="relative">
                     <select
@@ -328,7 +328,7 @@ export default function ConsultarPrecioPage() {
                     <ChevronDown className="w-4 h-4 text-stone-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                   </div>
                   <p className="text-[10px] text-stone-400 mt-1">
-                    Ajusta el período de consulta para el cálculo del precio promedio
+                     Adjust the query period for average price calculation
                   </p>
                 </div>
               </div>
@@ -339,14 +339,14 @@ export default function ConsultarPrecioPage() {
                   className="flex-1 py-3 rounded-lg font-bold text-sm border border-outline-variant text-secondary hover:bg-surface-container-high transition-all flex items-center justify-center gap-2"
                 >
                   <X className="w-4 h-4" />
-                  Limpiar
+                   Clear
                 </button>
                 <button
                   onClick={() => window.location.reload()}
                   className="flex-[2] bg-primary text-white py-3 rounded-lg font-bold text-sm hover:bg-primary/90 transition-all flex items-center justify-center gap-2"
                 >
                   <RefreshCw className="w-4 h-4" />
-                  Actualizar
+                   Refresh
                 </button>
               </div>
             </div>
@@ -357,8 +357,8 @@ export default function ConsultarPrecioPage() {
         <div className="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10 mb-8">
           <div className="flex justify-between items-end mb-10">
             <div>
-              <h4 className="text-xl font-bold text-foreground">Tendencia de Mercado</h4>
-              <p className="text-sm text-stone-500">Fluctuación del precio en los últimos 7 días</p>
+               <h4 className="text-xl font-bold text-foreground">Market Trend</h4>
+               <p className="text-sm text-stone-500">Price fluctuation over the last 7 days</p>
             </div>
             <div className="flex gap-2">
               <div className="flex items-center gap-1.5 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold">
@@ -407,7 +407,7 @@ export default function ConsultarPrecioPage() {
               <span>15 Oct</span>
               <span>16 Oct</span>
               <span>17 Oct</span>
-              <span>Hoy</span>
+               <span>Today</span>
             </div>
           </div>
         </div>
@@ -419,10 +419,10 @@ export default function ConsultarPrecioPage() {
               <div className="size-10 bg-primary/10 rounded-lg flex items-center justify-center">
                 <BadgeCheck className="w-5 h-5 text-primary" />
               </div>
-              <h5 className="text-sm font-bold text-foreground">Red Hedera</h5>
+               <h5 className="text-sm font-bold text-foreground">Hedera Network</h5>
             </div>
             <p className="text-xs text-stone-500 leading-relaxed">
-              Hashgraph consensus verified by 24 global nodes. Datos inmutables y verificables en cadena.
+               Hashgraph consensus verified by 24 global nodes. Immutable and verifiable on-chain data.
             </p>
           </div>
 
@@ -431,10 +431,10 @@ export default function ConsultarPrecioPage() {
               <div className="size-10 bg-primary/10 rounded-lg flex items-center justify-center">
                 <Download className="w-5 h-5 text-primary" />
               </div>
-              <h5 className="text-sm font-bold text-foreground">Total Volumen</h5>
+               <h5 className="text-sm font-bold text-foreground">Total Volume</h5>
             </div>
             <p className="text-xs text-stone-500 leading-relaxed">
-              {priceData.recordCount > 0 ? `${(priceData.recordCount * 250).toLocaleString()} kg` : "42,500 kg"} procesados este mes en la cadena.
+               {priceData.recordCount > 0 ? `${(priceData.recordCount * 250).toLocaleString()} kg` : "42,500 kg"} processed on-chain this month.
             </p>
           </div>
 
@@ -443,10 +443,10 @@ export default function ConsultarPrecioPage() {
               <div className="size-10 bg-primary/10 rounded-lg flex items-center justify-center">
                 <Info className="w-5 h-5 text-primary" />
               </div>
-              <h5 className="text-sm font-bold text-foreground">Gobernanza</h5>
+               <h5 className="text-sm font-bold text-foreground">Governance</h5>
             </div>
             <p className="text-xs text-stone-500 leading-relaxed">
-              Algoritmo de precio calculado por consenso de la comunidad agraria. Precios justos y transparentes.
+               Price algorithm calculated by agricultural community consensus. Fair and transparent pricing.
             </p>
           </div>
         </div>
@@ -455,7 +455,7 @@ export default function ConsultarPrecioPage() {
         {priceData.lastUpdated && (
           <div className="flex items-center justify-center gap-2 text-xs text-stone-500 mb-8">
             <History className="w-4 h-4" />
-            <span>Última actualización: {new Date(priceData.lastUpdated).toLocaleString()}</span>
+             <span>Last update: {new Date(priceData.lastUpdated).toLocaleString()}</span>
           </div>
         )}
       </main>
@@ -464,19 +464,19 @@ export default function ConsultarPrecioPage() {
       <nav className="fixed bottom-0 left-0 right-0 bg-surface-container border-t border-primary/10 py-3 px-6 md:hidden flex justify-around items-center z-50">
         <button onClick={() => router.push("/")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <Home className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Inicio</span>
+          <span className="text-[10px] font-bold">Home</span>
         </button>
         <button onClick={() => router.push("/mis-ventas")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <Receipt className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Ventas</span>
+          <span className="text-[10px] font-bold">Sales</span>
         </button>
         <button className="flex flex-col items-center gap-1 text-primary">
           <TrendingUp className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Precio</span>
+          <span className="text-[10px] font-bold">Price</span>
         </button>
         <button className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <User className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Perfil</span>
+          <span className="text-[10px] font-bold">Profile</span>
         </button>
       </nav>
 

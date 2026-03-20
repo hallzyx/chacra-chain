@@ -53,7 +53,7 @@ export default function LoginPage() {
       };
 
       if (!response.ok || !data.token || !data.user) {
-        throw new Error(data.error ?? "No se pudo iniciar sesión");
+        throw new Error(data.error ?? "Could not sign in");
       }
 
       localStorage.setItem("chacrachain_token", data.token);
@@ -68,7 +68,7 @@ export default function LoginPage() {
 
       router.push("/dashboard");
     } catch (submitError) {
-      setError(submitError instanceof Error ? submitError.message : "Error desconocido");
+      setError(submitError instanceof Error ? submitError.message : "Unknown error");
     } finally {
       setIsSubmitting(false);
     }
@@ -184,7 +184,7 @@ export default function LoginPage() {
                   type="button"
                   className="text-sm text-[#154212] hover:text-[#2d5a27] font-medium"
                 >
-                  Olvidé mi contraseña
+                  Forgot my password
                 </button>
               </div>
               <div className="relative">
@@ -253,11 +253,11 @@ export default function LoginPage() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
-                  Ingresando...
+                  Signing in...
                 </>
               ) : (
                 <>
-                  Entrar
+                  Sign In
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </>
               )}

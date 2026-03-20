@@ -19,7 +19,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const authUser = await getAuthenticatedUser(request);
     if (!authUser) {
-      return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const body = (await request.json()) as RegisterSaleRequestBody;
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const fechaTransaccion = body.fechaTransaccion?.trim() ?? "";
 
     if (!variedadCultivo || !cantidadKg || !precioUnitarioPen || !fechaTransaccion) {
-      return NextResponse.json({ error: "Todos los campos son obligatorios" }, { status: 400 });
+      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
     }
 
     const payload = {
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const walletCredentials = await getUserWalletCredentials(authUser.userId);
     if (!walletCredentials) {
       return NextResponse.json(
-        { error: "Wallet del usuario no encontrada" },
+        { error: "User wallet not found" },
         { status: 400 }
       );
     }
@@ -96,7 +96,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       hashscanUrl: `https://hashscan.io/testnet/transaction/${encodeURIComponent(hcsResult.transactionId)}`,
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Error interno";
+    const message = error instanceof Error ? error.message : "Internal error";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
@@ -144,7 +144,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       lastUpdated: new Date().toISOString(),
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Error interno";
+    const message = error instanceof Error ? error.message : "Internal error";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

@@ -65,7 +65,7 @@ export default function MisVentasPage() {
           router.push("/login");
           return;
         }
-        const user = JSON.parse(userStr) as { agricultorId?: string; email?: string };
+      const user = JSON.parse(userStr) as { agricultorId?: string; email?: string };
         if (!user?.agricultorId) {
           router.push("/login");
           return;
@@ -115,7 +115,7 @@ export default function MisVentasPage() {
               <LayoutGrid className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Mis Ventas</h2>
+              <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">My Sales</h2>
               <p className="text-primary/70 text-xs font-medium">ChacraChain x Hedera</p>
             </div>
           </div>
@@ -127,7 +127,7 @@ export default function MisVentasPage() {
             <div className="size-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4 animate-pulse">
               <Sprout className="w-8 h-8 animate-spin" />
             </div>
-            <p className="text-foreground/60 text-center">Cargando tus ventas...</p>
+            <p className="text-foreground/60 text-center">Loading your sales...</p>
           </div>
         </main>
       </div>
@@ -144,7 +144,7 @@ export default function MisVentasPage() {
               <LayoutGrid className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Mis Ventas</h2>
+              <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">My Sales</h2>
               <p className="text-primary/70 text-xs font-medium">ChacraChain x Hedera</p>
             </div>
           </div>
@@ -155,7 +155,7 @@ export default function MisVentasPage() {
           <div className="bg-red-500/10 border border-red-500/30 text-red-600 px-6 py-4 rounded-xl text-center">
             <div className="flex items-center justify-center mb-2">
               <span className="mr-2">⚠️</span>
-              <p className="font-medium">Error al cargar ventas</p>
+               <p className="font-medium">Error loading sales</p>
             </div>
             <p className="text-sm mt-1 text-red-600/70">{error}</p>
           </div>
@@ -173,7 +173,7 @@ export default function MisVentasPage() {
             <LayoutGrid className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Mis Ventas</h2>
+            <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">My Sales</h2>
             <p className="text-primary/70 text-xs font-medium">ChacraChain x Hedera</p>
           </div>
         </div>
@@ -182,7 +182,7 @@ export default function MisVentasPage() {
           className="flex items-center justify-center rounded h-10 bg-primary/10 text-primary hover:bg-primary/20 transition-all px-4 gap-2 text-sm font-bold"
         >
           <ArrowLeft className="w-5 h-5" />
-          <span>Volver</span>
+          <span>Back</span>
         </button>
       </header>
 
@@ -190,10 +190,10 @@ export default function MisVentasPage() {
       <main className="flex-1 px-4 md:px-10 py-6 max-w-5xl mx-auto w-full">
         {/* Title Section */}
         <div className="mb-8">
-          <h1 className="text-foreground tracking-tight text-3xl font-bold leading-tight">Historial de Ventas</h1>
+          <h1 className="text-foreground tracking-tight text-3xl font-bold leading-tight">Sales History</h1>
           <p className="text-secondary text-sm font-normal mt-1 flex items-center gap-1">
             <BadgeCheck className="w-4 h-4 text-primary" />
-            Registros inmutables en la red Hedera Hashgraph
+            Immutable records on the Hedera Hashgraph network
           </p>
         </div>
 
@@ -201,14 +201,14 @@ export default function MisVentasPage() {
         <div className="flex flex-wrap gap-4 mb-10">
           <div className="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-primary/10 bg-surface-container-low shadow-sm">
             <div className="flex items-center justify-between">
-              <p className="text-secondary text-sm font-medium">Total Registradas</p>
+               <p className="text-secondary text-sm font-medium">Total Registered</p>
               <Receipt className="w-5 h-5 text-primary" />
             </div>
             <p className="text-foreground tracking-tight text-3xl font-bold">{totalRegistradas}</p>
           </div>
           <div className="flex min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-6 border border-primary/10 bg-surface-container-low shadow-sm">
             <div className="flex items-center justify-between">
-              <p className="text-secondary text-sm font-medium">Volumen Total</p>
+               <p className="text-secondary text-sm font-medium">Total Volume</p>
               <Tractor className="w-5 h-5 text-primary" />
             </div>
             <div className="flex items-baseline gap-1">
@@ -222,7 +222,7 @@ export default function MisVentasPage() {
         <div className="flex flex-col gap-4 pb-20">
           <h3 className="text-foreground text-lg font-bold flex items-center gap-2 mb-2">
             <List className="w-5 h-5 text-primary" />
-            Registros Recientes
+             Recent Records
           </h3>
 
           {salesWithHcs.length === 0 ? (
@@ -231,14 +231,14 @@ export default function MisVentasPage() {
               <div className="size-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
                 <PackageOpen className="w-8 h-8" />
               </div>
-              <h4 className="text-foreground text-xl font-bold mb-2">No hay ventas registradas</h4>
-              <p className="text-secondary max-w-sm mb-6">Todas tus transacciones son seguras y verificables mediante el ID de transacción de Hedera.</p>
+              <h4 className="text-foreground text-xl font-bold mb-2">No sales registered yet</h4>
+              <p className="text-secondary max-w-sm mb-6">All your transactions are secure and verifiable using the Hedera transaction ID.</p>
               <button
                 onClick={() => router.push("/registrar-venta")}
                 className="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-primary/90 transition-all flex items-center gap-2"
               >
                 <PlusCircle className="w-5 h-5" />
-                Registrar nueva venta
+                 Register new sale
               </button>
             </div>
           ) : (
@@ -246,12 +246,12 @@ export default function MisVentasPage() {
             salesWithHcs.map(({ sale, hcsEvent }) => {
               const totalVenta = sale.cantidadKg * sale.precioUnitarioPen;
               const fecha = new Date(sale.createdAt);
-              const fechaStr = fecha.toLocaleDateString("es-PE", {
+              const fechaStr = fecha.toLocaleDateString("en-US", {
                 day: "numeric",
                 month: "short",
                 year: "numeric",
               });
-              const horaStr = fecha.toLocaleTimeString("es-PE", {
+              const horaStr = fecha.toLocaleTimeString("en-US", {
                 hour: "2-digit",
                 minute: "2-digit",
               });
@@ -275,15 +275,15 @@ export default function MisVentasPage() {
                   {/* Middle: Stats Grid */}
                   <div className="grid grid-cols-2 md:flex md:gap-8 border-t md:border-t-0 pt-4 md:pt-0 border-surface-container-high">
                     <div>
-                      <p className="text-secondary text-xs uppercase tracking-wider font-bold">Cantidad</p>
+                       <p className="text-secondary text-xs uppercase tracking-wider font-bold">Quantity</p>
                       <p className="text-foreground font-bold">{sale.cantidadKg.toLocaleString()} kg</p>
                     </div>
                     <div>
-                      <p className="text-secondary text-xs uppercase tracking-wider font-bold">Precio Unit.</p>
+                       <p className="text-secondary text-xs uppercase tracking-wider font-bold">Unit Price</p>
                       <p className="text-foreground font-bold">S/ {sale.precioUnitarioPen.toFixed(2)}</p>
                     </div>
                     <div className="hidden lg:block">
-                      <p className="text-secondary text-xs uppercase tracking-wider font-bold">Total</p>
+                       <p className="text-secondary text-xs uppercase tracking-wider font-bold">Total</p>
                       <p className="text-primary font-bold">S/ {totalVenta.toLocaleString("es-PE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     </div>
                   </div>
@@ -297,13 +297,13 @@ export default function MisVentasPage() {
                         rel="noreferrer"
                         className="flex items-center gap-1 text-primary text-sm font-bold bg-primary/5 px-3 py-2 rounded-lg hover:bg-primary/10 transition-colors"
                       >
-                        <span>Ver en HashScan</span>
+                         <span>View on HashScan</span>
                         <ExternalLink className="w-4 h-4" />
                       </a>
                     ) : (
                       <span className="text-secondary text-xs bg-surface-container-high px-3 py-2 rounded-lg flex items-center gap-1">
                         <Clock className="w-4 h-4" />
-                        Confirmando...
+                         Confirming...
                       </span>
                     )}
                   </div>
@@ -318,14 +318,14 @@ export default function MisVentasPage() {
               <div className="size-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
                 <PackageOpen className="w-8 h-8" />
               </div>
-              <h4 className="text-foreground text-xl font-bold mb-2">Fin del historial</h4>
-              <p className="text-secondary max-w-sm mb-6">Todas tus transacciones son seguras y verificables mediante el ID de transacción de Hedera.</p>
+               <h4 className="text-foreground text-xl font-bold mb-2">End of history</h4>
+               <p className="text-secondary max-w-sm mb-6">All your transactions are secure and verifiable using the Hedera transaction ID.</p>
               <button
                 onClick={() => router.push("/registrar-venta")}
                 className="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-primary/90 transition-all flex items-center gap-2"
               >
                 <PlusCircle className="w-5 h-5" />
-                Registrar nueva venta
+                 Register new sale
               </button>
             </div>
           )}
@@ -336,19 +336,19 @@ export default function MisVentasPage() {
       <nav className="fixed bottom-0 left-0 right-0 bg-surface-container border-t border-primary/10 py-3 px-6 md:hidden flex justify-around items-center z-50">
         <button onClick={() => router.push("/")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <Home className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Inicio</span>
+          <span className="text-[10px] font-bold">Home</span>
         </button>
         <button className="flex flex-col items-center gap-1 text-primary">
           <Receipt className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Ventas</span>
+          <span className="text-[10px] font-bold">Sales</span>
         </button>
         <button onClick={() => router.push("/consultar-precio")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <Store className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Mercado</span>
+          <span className="text-[10px] font-bold">Market</span>
         </button>
         <button className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <User className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Perfil</span>
+          <span className="text-[10px] font-bold">Profile</span>
         </button>
       </nav>
 

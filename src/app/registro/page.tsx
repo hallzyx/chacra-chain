@@ -43,11 +43,11 @@ export default function RegistroPage() {
    */
   const validatePasswords = (): boolean => {
     if (password !== confirmPassword) {
-      setPasswordError("Las contraseñas no coinciden");
+      setPasswordError("Passwords do not match");
       return false;
     }
     if (password.length < 8) {
-      setPasswordError("La contraseña debe tener al menos 8 caracteres");
+      setPasswordError("Password must be at least 8 characters");
       return false;
     }
     setPasswordError(null);
@@ -85,7 +85,7 @@ export default function RegistroPage() {
       };
 
       if (!response.ok || !data.token || !data.user) {
-        throw new Error(data.error ?? "No se pudo registrar la cuenta");
+        throw new Error(data.error ?? "Could not register account");
       }
 
       localStorage.setItem("chacrachain_token", data.token);
@@ -100,7 +100,7 @@ export default function RegistroPage() {
 
       router.push("/dashboard");
     } catch (submitError) {
-      setError(submitError instanceof Error ? submitError.message : "Error desconocido");
+      setError(submitError instanceof Error ? submitError.message : "Unknown error");
     } finally {
       setIsSubmitting(false);
     }
@@ -236,7 +236,7 @@ export default function RegistroPage() {
                   minLength={8}
                   required
                   className="w-full px-4 py-3 pl-11 pr-11 bg-[#f3f4f3] border-0 rounded-xl text-[#191c1c] placeholder-[#72796e] focus:outline-none focus:ring-2 focus:ring-[#154212] transition-all"
-                  placeholder="Minimo 8 caracteres"
+                   placeholder="Minimum 8 characters"
                 />
                 <div className="absolute left-3 top-1/2 -translate-y-1/2">
                   <svg className="w-5 h-5 text-[#72796e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -274,7 +274,7 @@ export default function RegistroPage() {
                   minLength={8}
                   required
                   className="w-full px-4 py-3 pl-11 pr-11 bg-[#f3f4f3] border-0 rounded-xl text-[#191c1c] placeholder-[#72796e] focus:outline-none focus:ring-2 focus:ring-[#154212] transition-all"
-                  placeholder="Repite tu contrasena"
+                   placeholder="Repeat your password"
                 />
                 <div className="absolute left-3 top-1/2 -translate-y-1/2">
                   <svg className="w-5 h-5 text-[#72796e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -327,11 +327,11 @@ export default function RegistroPage() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
-                  Creando cuenta...
+                  Creating account...
                 </>
               ) : (
                 <>
-                  Crear Cuenta
+                  Create Account
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </>
               )}

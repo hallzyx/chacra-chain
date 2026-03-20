@@ -66,7 +66,7 @@ export default function DashboardPage() {
   const [sales, setSales] = useState<SaleWithHcs[]>([]);
   const [stats, setStats] = useState<DashboardStats>({ totalKg: 0, totalVentas: 0, precioPromedio: 0 });
   const [loading, setLoading] = useState(true);
-  const [userName, setUserName] = useState("Agricultor");
+  const [userName, setUserName] = useState("Farmer");
 
   // Fetch user sales and calculate stats
   useEffect(() => {
@@ -77,7 +77,7 @@ export default function DashboardPage() {
         
         if (userRaw) {
           const user = JSON.parse(userRaw);
-          setUserName(user.agricultorId || "Agricultor");
+          setUserName(user.agricultorId || "Farmer");
         }
 
         if (!token) {
@@ -132,10 +132,10 @@ export default function DashboardPage() {
     const diffHours = Math.floor(diffMs / 3600000);
     const diffDays = Math.floor(diffMs / 86400000);
 
-    if (diffMins < 1) return "Hace un momento";
-    if (diffMins < 60) return `Hace ${diffMins} min`;
-    if (diffHours < 24) return `Hace ${diffHours} hora${diffHours > 1 ? 's' : ''}`;
-    if (diffDays < 7) return `Hace ${diffDays} día${diffDays > 1 ? 's' : ''}`;
+    if (diffMins < 1) return "Just now";
+    if (diffMins < 60) return `${diffMins} min ago`;
+    if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+    if (diffDays < 7) return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
     return date.toLocaleDateString("es-PE", { day: "2-digit", month: "short" }).toUpperCase();
   };
 
@@ -151,7 +151,7 @@ export default function DashboardPage() {
             <LayoutGrid className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Panel de Control</h2>
+            <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Dashboard</h2>
             <p className="text-primary/70 text-xs font-medium">ChacraChain x Hedera</p>
           </div>
         </div>
@@ -168,7 +168,7 @@ export default function DashboardPage() {
             className="flex items-center justify-center rounded h-10 bg-primary/10 text-primary hover:bg-primary/20 transition-all px-4 gap-2 text-sm font-bold"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span className="hidden md:inline">Volver</span>
+            <span className="hidden md:inline">Back</span>
           </button>
         </div>
       </header>
@@ -177,18 +177,18 @@ export default function DashboardPage() {
       <main className="flex-1 px-4 md:px-10 py-6 max-w-7xl mx-auto w-full">
         {/* Welcome Section */}
         <header className="mb-8">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-secondary mb-2 block">Bienvenido de vuelta</span>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight leading-none">¡Hola, {userName}!</h1>
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-secondary mb-2 block">Welcome back</span>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight leading-none">Hi, {userName}!</h1>
           <p className="mt-4 text-secondary max-w-xl leading-relaxed">
-            Gestiona tus cosechas y asegura la transparencia de tus ventas en la red Hedera. 
-            Cada registro es un paso hacia un mercado agrícola más justo.
+            Manage your harvests and ensure transparent sales on the Hedera network.
+            Every record is a step toward a fairer agricultural market.
           </p>
         </header>
 
         {/* Quick Stats Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           <div className="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 shadow-sm">
-            <p className="text-secondary font-medium text-xs uppercase tracking-wider mb-2">Total Registrado (kg)</p>
+            <p className="text-secondary font-medium text-xs uppercase tracking-wider mb-2">Total Registered (kg)</p>
             <div className="flex items-baseline gap-2">
               <span className="text-3xl font-extrabold text-primary">{stats.totalKg.toLocaleString("es-PE")}</span>
               <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">kg</span>
@@ -196,7 +196,7 @@ export default function DashboardPage() {
           </div>
 
           <div className="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 shadow-sm">
-            <p className="text-secondary font-medium text-xs uppercase tracking-wider mb-2">Precio Promedio (S/.)</p>
+            <p className="text-secondary font-medium text-xs uppercase tracking-wider mb-2">Average Price (S/.)</p>
             <div className="flex items-baseline gap-2">
               <span className="text-3xl font-extrabold text-primary">{stats.precioPromedio.toFixed(2)}</span>
               <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">S/./kg</span>
@@ -204,17 +204,17 @@ export default function DashboardPage() {
           </div>
 
           <div className="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 shadow-sm">
-            <p className="text-secondary font-medium text-xs uppercase tracking-wider mb-2">Transacciones</p>
+            <p className="text-secondary font-medium text-xs uppercase tracking-wider mb-2">Transactions</p>
             <div className="flex items-baseline gap-2">
               <span className="text-3xl font-extrabold text-primary">{stats.totalVentas}</span>
             </div>
           </div>
 
           <div className="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 shadow-sm">
-            <p className="text-secondary font-medium text-xs uppercase tracking-wider mb-2">Status Red</p>
+            <p className="text-secondary font-medium text-xs uppercase tracking-wider mb-2">Network Status</p>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-xl font-extrabold text-primary">Activo</span>
+              <span className="text-xl font-extrabold text-primary">Active</span>
             </div>
           </div>
         </div>
@@ -231,11 +231,11 @@ export default function DashboardPage() {
               <Sprout className="w-10 h-10 text-on-primary" />
             </div>
             <div className="z-10">
-              <h2 className="text-3xl font-extrabold text-on-primary mb-3">Registrar Venta</h2>
-              <p className="text-on-primary/70 max-w-md font-body text-lg">Inmortaliza tu cosecha en el ledger distribuido. Garantiza origen y calidad de forma instantánea.</p>
+              <h2 className="text-3xl font-extrabold text-on-primary mb-3">Register Sale</h2>
+              <p className="text-on-primary/70 max-w-md font-body text-lg">Record your harvest on the distributed ledger. Guarantee origin and quality instantly.</p>
             </div>
             <div className="z-10 mt-8 flex items-center gap-2 text-on-primary font-bold group-hover:translate-x-2 transition-transform">
-              <span>Empezar registro</span>
+              <span>Start registration</span>
               <ArrowLeft className="w-5 h-5 rotate-180" />
             </div>
           </button>
@@ -250,11 +250,11 @@ export default function DashboardPage() {
               <TrendingUp className="w-8 h-8 text-on-secondary" />
             </div>
             <div className="z-10">
-              <h2 className="text-2xl font-extrabold text-on-secondary mb-3">Consultar Precio</h2>
-              <p className="text-on-secondary/70 font-body">Accede al oráculo de precios en tiempo real para el mercado nacional.</p>
+              <h2 className="text-2xl font-extrabold text-on-secondary mb-3">Check Price</h2>
+              <p className="text-on-secondary/70 font-body">Access real-time price oracle data for the national market.</p>
             </div>
             <div className="z-10 mt-8 flex items-center gap-2 text-on-secondary font-bold group-hover:translate-x-1 transition-transform">
-              <span>Ver mercado</span>
+              <span>View market</span>
               <ArrowLeft className="w-4 h-4 rotate-180" />
             </div>
           </button>
@@ -264,14 +264,14 @@ export default function DashboardPage() {
         <section className="max-w-5xl">
           <div className="flex justify-between items-end mb-8">
             <div>
-              <h3 className="text-2xl font-bold text-foreground">Actividad Reciente</h3>
-              <p className="text-secondary text-sm">Registros inmutables en la cadena</p>
+              <h3 className="text-2xl font-bold text-foreground">Recent Activity</h3>
+              <p className="text-secondary text-sm">Immutable records on-chain</p>
             </div>
             <button 
               onClick={() => router.push("/mis-ventas")}
               className="text-primary font-bold text-sm hover:underline"
             >
-              Ver historial completo
+              View full history
             </button>
           </div>
 
@@ -282,13 +282,13 @@ export default function DashboardPage() {
           ) : recentSales.length === 0 ? (
             <div className="bg-surface-container-low p-8 rounded-xl border border-outline-variant/10 text-center">
               <Sprout className="w-12 h-12 text-secondary/30 mx-auto mb-4" />
-              <p className="text-secondary font-medium">No tienes ventas registradas aún</p>
-              <p className="text-secondary/70 text-sm mt-1">Empieza registrando tu primera venta</p>
+              <p className="text-secondary font-medium">You have no sales registered yet</p>
+              <p className="text-secondary/70 text-sm mt-1">Start by registering your first sale</p>
               <button
                 onClick={() => router.push("/registrar-venta")}
                 className="mt-4 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 transition"
               >
-                Registrar Venta
+                Register Sale
               </button>
             </div>
           ) : (
@@ -313,7 +313,7 @@ export default function DashboardPage() {
                     <div className="text-right">
                       <p className="text-lg font-bold text-primary">{saleWithHcs.sale.cantidadKg.toLocaleString("es-PE")} kg</p>
                       <p className="text-xs text-secondary font-medium">
-                        S/. {(saleWithHcs.sale.cantidadKg * saleWithHcs.sale.precioUnitarioPen).toFixed(2)} total
+                          S/. {(saleWithHcs.sale.cantidadKg * saleWithHcs.sale.precioUnitarioPen).toFixed(2)} total
                       </p>
                     </div>
                     <div className="flex items-center gap-2 text-primary/40">
@@ -334,19 +334,19 @@ export default function DashboardPage() {
       <nav className="fixed bottom-0 left-0 right-0 bg-surface-container border-t border-primary/10 py-3 px-6 md:hidden flex justify-around items-center z-50">
         <button className="flex flex-col items-center gap-1 text-primary">
           <LayoutGrid className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Panel</span>
+          <span className="text-[10px] font-bold">Dashboard</span>
         </button>
         <button onClick={() => router.push("/registrar-venta")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <Sprout className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Venta</span>
+          <span className="text-[10px] font-bold">Sale</span>
         </button>
         <button onClick={() => router.push("/consultar-precio")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <TrendingUp className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Precio</span>
+          <span className="text-[10px] font-bold">Price</span>
         </button>
         <button className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <User className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Perfil</span>
+          <span className="text-[10px] font-bold">Profile</span>
         </button>
       </nav>
 
