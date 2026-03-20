@@ -198,6 +198,13 @@
       "token": "b01555878f5c64eef9a8ced46cd82b7c9bea6694c1a76b9ec0960532c21264ff",
       "createdAt": "2026-03-19T16:24:45.368Z",
       "expiresAt": "2026-03-26T16:24:45.368Z"
+    },
+    {
+      "id": "e470ddbe-28db-41fa-a7e8-eb123b8954a9",
+      "userId": "8f1e0cb2-4516-4a89-9f44-25c41d8d4316",
+      "token": "a2a41e9d45aff53de222cdddad496d97baff0a0822276a2bb49099b9c6051c55",
+      "createdAt": "2026-03-20T00:29:23.151Z",
+      "expiresAt": "2026-03-27T00:29:23.152Z"
     }
   ]
 }
