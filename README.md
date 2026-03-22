@@ -9,6 +9,33 @@ ChacraChain is a Next.js + Hedera MVP focused on agricultural sale traceability 
 - Fast UX with traditional sign-in (no wallet extension required)
 - Custodial backend transaction handling for low-friction onboarding
 
+
+## Project Documentation
+
+- [architecture.md](./architecture.md) — system architecture and component interactions
+- [api-reference.md](./api-reference.md) — API endpoints, payloads, and response contracts
+- [hedera-operations.md](./hedera-operations.md) — topic setup, account provisioning, and signing flow
+- [deployment.md](./deployment.md) — deployment guidance and platform constraints
+- [judges-guide.md](./judges-guide.md) — concise hackathon presentation script for judges
+- [product.md](./product.md) — product definition and scope
+- [stack.md](./stack.md) — technical stack and implementation boundaries
+- [userflow_register_sale.md](./userflow_register_sale.md) — register sale flow
+- [userflow_check_price.md](./userflow_check_price.md) — check price flow
+- [userflow_view_my_sales.md](./userflow_view_my_sales.md) — sales history flow
+- [ENV_SETUP.md](./ENV_SETUP.md) — environment variable setup
+- [AGENTS.md](./AGENTS.md) — project orchestration instructions
+
+## Quick Judge Path (Suggested)
+
+If you are evaluating the project in limited time, follow this order:
+
+1. [judges-guide.md](./judges-guide.md)
+2. [product.md](./product.md)
+3. [architecture.md](./architecture.md)
+4. [hedera-operations.md](./hedera-operations.md)
+5. [deployment.md](./deployment.md)
+
+
 ## Main App Routes
 
 - `/` — landing page
@@ -69,27 +96,3 @@ npm run lint
 npm run build
 ```
 
-## Project Documentation
-
-- [architecture.md](./architecture.md) — system architecture and component interactions
-- [api-reference.md](./api-reference.md) — API endpoints, payloads, and response contracts
-- [hedera-operations.md](./hedera-operations.md) — topic setup, account provisioning, and signing flow
-- [deployment.md](./deployment.md) — deployment guidance and platform constraints
-- [judges-guide.md](./judges-guide.md) — concise hackathon presentation script for judges
-- [product.md](./product.md) — product definition and scope
-- [stack.md](./stack.md) — technical stack and implementation boundaries
-- [userflow_register_sale.md](./userflow_register_sale.md) — register sale flow
-- [userflow_check_price.md](./userflow_check_price.md) — check price flow
-- [userflow_view_my_sales.md](./userflow_view_my_sales.md) — sales history flow
-- [ENV_SETUP.md](./ENV_SETUP.md) — environment variable setup
-- [AGENTS.md](./AGENTS.md) — project orchestration instructions
-
-## Quick Judge Path (Suggested)
-
-If you are evaluating the project in limited time, follow this order:
-
-1. [judges-guide.md](./judges-guide.md)
-2. [product.md](./product.md)
-3. [architecture.md](./architecture.md)
-4. [hedera-operations.md](./hedera-operations.md)
-5. [deployment.md](./deployment.md)
