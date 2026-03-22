@@ -4,28 +4,13 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { 
   LayoutGrid,
-  Home,
   Sprout,
   TrendingUp,
-  Receipt,
   User,
   ArrowLeft,
   BadgeCheck,
-  Info,
-  Hash,
-  Leaf,
-  Scale,
-  DollarSign,
-  Calendar,
-  TrendingDown,
-  Package,
-  CheckCircle2,
-  Clock,
-  MoreHorizontal,
   Search,
   Bell,
-  Settings,
-  LogOut,
   Loader2
 } from "lucide-react";
 
@@ -223,7 +208,7 @@ export default function DashboardPage() {
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 text-slate-100">
           {/* Large Primary Card: Registrar Venta */}
           <button 
-            onClick={() => router.push("/registrar-venta")}
+            onClick={() => router.push("/register-sale")}
             className="lg:col-span-8 group relative overflow-hidden bg-primary p-10 rounded-xl flex flex-col justify-between items-start text-left min-h-[320px] active:scale-[0.98] transition-all hover:shadow-xl hover:shadow-primary/20 cursor-pointer"
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary-container opacity-20 -mr-20 -mt-20 rounded-full blur-3xl group-hover:scale-110 transition-transform"></div>
@@ -242,7 +227,7 @@ export default function DashboardPage() {
 
           {/* Second Primary Card: Consultar Precio */}
           <button 
-            onClick={() => router.push("/consultar-precio")}
+            onClick={() => router.push("/check-price")}
             className="lg:col-span-4 group relative overflow-hidden bg-secondary p-8 rounded-xl flex flex-col justify-between items-start text-left min-h-[320px] active:scale-[0.98] transition-all hover:shadow-xl hover:shadow-secondary/20 cursor-pointer"
           >
             <div className="absolute bottom-0 right-0 w-32 h-32 bg-secondary-container opacity-10 -mb-10 -mr-10 rounded-full blur-2xl"></div>
@@ -268,7 +253,7 @@ export default function DashboardPage() {
               <p className="text-secondary text-sm">Immutable records on-chain</p>
             </div>
             <button 
-              onClick={() => router.push("/mis-ventas")}
+              onClick={() => router.push("/my-sales")}
               className="text-primary font-bold text-sm hover:underline"
             >
               View full history
@@ -285,7 +270,7 @@ export default function DashboardPage() {
               <p className="text-secondary font-medium">You have no sales registered yet</p>
               <p className="text-secondary/70 text-sm mt-1">Start by registering your first sale</p>
               <button
-                onClick={() => router.push("/registrar-venta")}
+                onClick={() => router.push("/register-sale")}
                 className="mt-4 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 transition"
               >
                 Register Sale
@@ -336,11 +321,11 @@ export default function DashboardPage() {
           <LayoutGrid className="w-5 h-5" />
           <span className="text-[10px] font-bold">Dashboard</span>
         </button>
-        <button onClick={() => router.push("/registrar-venta")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
+        <button onClick={() => router.push("/register-sale")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <Sprout className="w-5 h-5" />
           <span className="text-[10px] font-bold">Sale</span>
         </button>
-        <button onClick={() => router.push("/consultar-precio")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
+        <button onClick={() => router.push("/check-price")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <TrendingUp className="w-5 h-5" />
           <span className="text-[10px] font-bold">Price</span>
         </button>

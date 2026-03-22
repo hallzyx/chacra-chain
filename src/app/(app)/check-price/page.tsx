@@ -3,19 +3,13 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { 
-  LayoutGrid, 
-  Sprout, 
   TrendingUp, 
-  TrendingDown,
   RefreshCw,
   Download,
   Filter,
-  Calendar,
-  MapPin,
   X,
   Home,
   Receipt,
-  Store,
   User,
   ArrowLeft,
   BadgeCheck,
@@ -40,19 +34,36 @@ interface DateRangeConfig {
   days: number;
 }
 
+const DATE_RANGE_OPTIONS: DateRangeConfig[] = [
+  { label: "Last 30 days", value: "30d", days: 30 },
+  { label: "Last week", value: "7d", days: 7 },
+  { label: "Last day", value: "1d", days: 1 },
+];
+
+/**
+ * Calculates an ISO date range based on selected relative range.
+ * @param range - Relative date range option.
+ * @returns Start and end date in YYYY-MM-DD format.
+ */
+function calculateDateRange(range: DateRangeOption): { desde: string; hasta: string } {
+  const hoy = new Date();
+  const hasta = hoy.toISOString().split("T")[0];
+
+  const dias = DATE_RANGE_OPTIONS.find((opt) => opt.value === range)?.days || 30;
+  const desdeDate = new Date(hoy);
+  desdeDate.setDate(hoy.getDate() - dias);
+  const desde = desdeDate.toISOString().split("T")[0];
+
+  return { desde, hasta };
+}
+
 /**
  * Renders average market price data from persisted sales in db.json.
  * Styled with ChacraChain AgriTech Design System from Stich.
  * @returns Price query page component.
  */
-export default function ConsultarPrecioPage() {
+export default function CheckPricePage() {
   const router = useRouter();
-  
-  const dateRangeOptions: DateRangeConfig[] = [
-    { label: "Last 30 days", value: "30d", days: 30 },
-    { label: "Last week", value: "7d", days: 7 },
-    { label: "Last day", value: "1d", days: 1 },
-  ];
   
   const [selectedDateRange, setSelectedDateRange] = useState<DateRangeOption>("30d");
   
@@ -71,32 +82,6 @@ export default function ConsultarPrecioPage() {
   });
 
   const variedades = ["", "Papa Canchan", "Papa Única", "Papa Yungay", "Papa Tomasa"];
-
-  // Chart data (mock trend data for visualization)
-  const trendData = [
-    { day: "12 Oct", price: 1.15 },
-    { day: "13 Oct", price: 1.18 },
-    { day: "14 Oct", price: 1.12 },
-    { day: "15 Oct", price: 1.14 },
-    { day: "16 Oct", price: 1.21 },
-    { day: "17 Oct", price: 1.19 },
-     { day: "Today", price: priceData.averagePrice || 1.20 },
-  ];
-
-  const trendPercent = 2.4; // Mock positive trend
-
-  // Helper function to calculate date range
-  const calculateDateRange = (range: DateRangeOption): { desde: string; hasta: string } => {
-    const hoy = new Date();
-    const hasta = hoy.toISOString().split('T')[0];
-    
-    const dias = dateRangeOptions.find(opt => opt.value === range)?.days || 30;
-    const desdeDate = new Date(hoy);
-    desdeDate.setDate(hoy.getDate() - dias);
-    const desde = desdeDate.toISOString().split('T')[0];
-    
-    return { desde, hasta };
-  };
 
   /**
    * Fetches filtered average price data from backend endpoint.
@@ -319,7 +304,7 @@ export default function ConsultarPrecioPage() {
                       onChange={(e) => handleDateRangeChange(e.target.value as DateRangeOption)}
                       className="w-full bg-surface-container-lowest border-0 rounded-lg text-sm font-medium focus:ring-1 focus:ring-primary h-11 px-4 appearance-none cursor-pointer"
                     >
-                      {dateRangeOptions.map((option) => (
+                      {DATE_RANGE_OPTIONS.map((option) => (
                         <option key={option.value} value={option.value}>
                           {option.label}
                         </option>
@@ -466,7 +451,7 @@ export default function ConsultarPrecioPage() {
           <Home className="w-5 h-5" />
           <span className="text-[10px] font-bold">Home</span>
         </button>
-        <button onClick={() => router.push("/mis-ventas")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
+        <button onClick={() => router.push("/my-sales")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <Receipt className="w-5 h-5" />
           <span className="text-[10px] font-bold">Sales</span>
         </button>

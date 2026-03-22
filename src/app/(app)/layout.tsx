@@ -9,14 +9,37 @@ import {
   User,
   Settings,
   LogOut,
-  ChevronLeft,
-  ChevronRight,
   Bell,
-  Search,
   Menu,
-  X
 } from "lucide-react";
 import { useState, useEffect } from "react";
+
+interface StoredUserProfile {
+  agricultorId?: string;
+  email?: string;
+  walletAddress?: string;
+}
+
+/**
+ * Reads persisted user profile data from localStorage when available.
+ * @returns Parsed profile object with safe defaults.
+ */
+function getStoredUserProfile(): StoredUserProfile {
+  if (typeof window === "undefined") {
+    return {};
+  }
+
+  const userRaw = localStorage.getItem("chacrachain_user");
+  if (!userRaw) {
+    return {};
+  }
+
+  try {
+    return JSON.parse(userRaw) as StoredUserProfile;
+  } catch {
+    return {};
+  }
+}
 
 /**
  * App Layout with SideNavBar Drawer
@@ -26,31 +49,13 @@ import { useState, useEffect } from "react";
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
+  const storedUser = getStoredUserProfile();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [userName, setUserName] = useState<string>("Farmer");
-  const [userEmail, setUserEmail] = useState<string>("");
-  const [walletAddress, setWalletAddress] = useState<string>("");
+  const [userName] = useState<string>(storedUser.agricultorId || "Farmer");
+  const [userEmail] = useState<string>(storedUser.email || "");
+  const [walletAddress] = useState<string>(storedUser.walletAddress || "");
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-
-  // Load user info on mount
-  useEffect(() => {
-    const userRaw = localStorage.getItem("chacrachain_user");
-    if (userRaw) {
-      try {
-        const user = JSON.parse(userRaw) as { 
-          agricultorId?: string; 
-          email?: string;
-          walletAddress?: string;
-        };
-        setUserName(user.agricultorId || "Farmer");
-        setUserEmail(user.email || "");
-        setWalletAddress(user.walletAddress || "");
-      } catch {
-        // ignore
-      }
-    }
-  }, []);
 
   // Close user menu when clicking outside
   useEffect(() => {
@@ -70,15 +75,20 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     router.push("/login");
   };
 
+  /**
+   * Navigates to an app route and closes transient UI overlays.
+   * @param href - Destination path.
+   */
+  const navigateTo = (href: string): void => {
+    setIsMobileOpen(false);
+    setIsUserMenuOpen(false);
+    router.push(href);
+  };
+
   // Don't show drawer on root route
   if (pathname === "/") {
     return <>{children}</>;
   }
-
-  // Close mobile drawer on route change
-  useEffect(() => {
-    setIsMobileOpen(false);
-  }, [pathname]);
 
   const navItems = [
     { 
@@ -90,25 +100,25 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     { 
       label: "Register", 
       icon: Sprout, 
-      href: "/registrar-venta",
-      active: pathname === "/registrar-venta" 
+      href: "/register-sale",
+      active: pathname === "/register-sale" 
     },
     { 
       label: "Prices", 
       icon: TrendingUp, 
-      href: "/consultar-precio",
-      active: pathname === "/consultar-precio" 
+      href: "/check-price",
+      active: pathname === "/check-price" 
     },
     { 
       label: "Sales", 
       icon: Receipt, 
-      href: "/mis-ventas",
-      active: pathname === "/mis-ventas" 
+      href: "/my-sales",
+      active: pathname === "/my-sales" 
     },
   ];
 
   const bottomItems = [
-    { label: "Settings", icon: Settings, href: "/ajustes" },
+    { label: "Settings", icon: Settings, href: "/settings" },
     { label: "Sign Out", icon: LogOut, href: "/login", danger: true },
   ];
 
@@ -234,7 +244,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           {navItems.map((item) => (
             <button
               key={item.href}
-              onClick={() => router.push(item.href)}
+               onClick={() => navigateTo(item.href)}
               className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-200 ${
                 item.active 
                   ? "bg-primary text-white shadow-lg shadow-primary/20" 
@@ -278,7 +288,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           {bottomItems.map((item) => (
             <button
               key={item.label}
-              onClick={() => item.href === "/logout" ? router.push("/login") : router.push(item.href)}
+              onClick={() => navigateTo(item.href)}
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
                 item.danger 
                   ? "text-red-500 hover:bg-red-50" 

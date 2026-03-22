@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { Client, AccountId, PrivateKey, TopicCreateTransaction } = require("@hashgraph/sdk");
 const dotenv = require("dotenv");
 

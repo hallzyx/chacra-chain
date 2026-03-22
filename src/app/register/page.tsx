@@ -6,7 +6,6 @@ import Link from "next/link";
 import { 
   Sprout, 
   Shield, 
-  MapPin,
   Eye,
   EyeOff, 
   ArrowRight,
@@ -19,7 +18,7 @@ import {
  * Styled with ChacraChain AgriTech Design System from Stitch.
  * @returns Registration screen component.
  */
-export default function RegistroPage() {
+export default function RegisterPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

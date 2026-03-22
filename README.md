@@ -1,96 +1,95 @@
-# ChacraChain - AgriTech Web3 Solution
+# ChacraChain
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+ChacraChain is a Next.js + Hedera MVP focused on agricultural sale traceability and transparent market intelligence. It allows users to register sales immutably through Hedera Consensus Service (HCS), query average prices, and review a verifiable personal sales history.
 
-## Proyecto: ChacraChain
+## Core Value
 
-ChacraChain es una aplicación descentralizada (DApp) diseñada para resolver la asimetría de información en el sector agrícola peruano, permitiendo el registro inmutable de ventas y el acceso a un oráculo de precios promedio utilizando Hedera Consensus Service (HCS).
+- Immutable sale records on Hedera testnet
+- Auditable transaction links via HashScan
+- Fast UX with traditional sign-in (no wallet extension required)
+- Custodial backend transaction handling for low-friction onboarding
 
-## Características Principales
+## Main App Routes
 
-- **Registro Inmutable de Ventas:** Cada transacción de venta se envía como un mensaje a un Topic específico de HCS, generando una prueba criptográfica auditable.
-- **Oráculo de Precios Promedio:** Sistema que consulta y calcula el precio promedio de mercado basándose en los datos históricos verificables registrados en la red.
-- **Onboarding Web 2.5:** Autenticación tradicional (OTP vía SMS/WhatsApp) para eliminar la fricción Web3 para usuarios finales.
-- **Backend Custodial:** Gestión de cuentas de Hedera y subsidización de costos de gas por parte del backend.
+- `/` — landing page
+- `/login` — sign in
+- `/register` — account creation
+- `/dashboard` — authenticated overview
+- `/register-sale` — create a sale and submit to HCS
+- `/check-price` — compute and display average prices
+- `/my-sales` — user sales history with verification links
 
-## Tecnologías Utilizadas
+## Tech Stack
 
-- **Framework:** Next.js 14 (App Router)
-- **Lenguaje:** TypeScript
-- **Estilos:** Tailwind CSS
-- **SDK Blockchain:** @hashgraph/sdk (enfocado en HCS)
-- **Red DLT:** Hedera Hashgraph (Testnet para demo)
+- Next.js (App Router)
+- React + TypeScript
+- Tailwind CSS
+- `@hashgraph/sdk`
 
-## Empezando con el Desarrollo
-
-Primero, ejecuta el servidor de desarrollo:
+## Local Development
 
 ```bash
+npm install
 npm run dev
-# o
-yarn dev
-# o
-pnpm dev
-# o
-bun dev
 ```
 
-Abre [http://localhost:3000](http://localhost:3000) con tu navegador para ver el resultado.
+Open `http://localhost:3000`.
 
-Puedes comenzar a editando las páginas en el directorio `src/app/`. La página se actualiza automáticamente conforme editas los archivos.
+## Required Environment Variables
 
-## Estructura del Proyecto
+Create `.env.local` in the project root.
 
-```
-src/
-├── app/                     # Next.js App Router
-│   ├── page.tsx             # Página principal (registrar venta / consultar precio)
-│   ├── registrar-venta/     # Formulario de registro de venta
-│   └── consultar-precio/    # Consulta de precios promedio
-├── components/              # Componentes UI reutilizables
-├── lib/                     # Utilidades de Hedera y funciones HCS
-├── backend/                 # Lógica del backend (simulada para demo)
-└── types/                   # Interfaces TypeScript
+```bash
+HEDERA_ACCOUNT_ID=0.0.xxxxx
+HEDERA_PRIVATE_KEY=302e020100300506032b657004220420...
+HEDERA_HCS_TOPIC_ID=0.0.xxxxx
+APP_ENCRYPTION_KEY=a-long-random-string
 ```
 
-## Flujo de Trabajo para el Hackathon
+> Important: Never expose private keys with `NEXT_PUBLIC_*` variables.
 
-El jurado verá:
-1. Pantalla principal con opciones para registrar venta o consultar precios
-2. Botón "Registrar Venta" → formulario para ingresar datos de transacción agrícola
-3. Botón "Consultar Precio" → muestra precios promedio del mercado para papa
-4. Tras registrar venta → confirma envío a HCS y muestra tx hash
-5. Tras consultar precio → muestra precio promedio basado en datos históricos en HCS
+## Data Layer Notes
 
-## Despliegue en Vercel
+This project currently uses `db.json` through `src/lib/db.ts` for local development and demo persistence.
 
-La forma más fácil de desplegar tu aplicación Next.js es usar la [Plataforma Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) de los creadores de Next.js.
+- Works locally where filesystem writes are allowed.
+- Vercel serverless runtime is read-only for this use case (`EROFS` on `db.json` writes).
 
-Consulta nuestra [documentación de despliegue de Next.js](https://nextjs.org/docs/app/building-your-application/deploying) para más detalles.
+### Deployment decision for this version
 
-## Variables de Entorno
+This MVP is deployed on **VPS + Dokploy** to keep writable persistence and preserve current architecture behavior.
 
-Para ejecutar localmente, crea un archivo `.env.local` basado en `.env.example`:
+- See [deployment.md](./deployment.md) for full operational setup.
+- See [architecture.md](./architecture.md) for rationale and tradeoffs.
 
-```
-HEDERA_NETWORK=testnet
-HEDERA_ACCOUNT_ID=0.0.123456
-HEDERA_PRIVATE_KEY=0x...
-OTP_PROVIDER=twilio
-DB_CONNECTION_STRING=postgres://...
+## Build and Validation
+
+```bash
+npm run lint
+npm run build
 ```
 
-> **Nota:** Para el demo hackathon, estas variables se simulan en el código.
+## Project Documentation
 
-## Lo que NO estamos construyendo (en este MVP)
+- [architecture.md](./architecture.md) — system architecture and component interactions
+- [api-reference.md](./api-reference.md) — API endpoints, payloads, and response contracts
+- [hedera-operations.md](./hedera-operations.md) — topic setup, account provisioning, and signing flow
+- [deployment.md](./deployment.md) — deployment guidance and platform constraints
+- [judges-guide.md](./judges-guide.md) — concise hackathon presentation script for judges
+- [product.md](./product.md) — product definition and scope
+- [stack.md](./stack.md) — technical stack and implementation boundaries
+- [userflow_register_sale.md](./userflow_register_sale.md) — register sale flow
+- [userflow_check_price.md](./userflow_check_price.md) — check price flow
+- [userflow_view_my_sales.md](./userflow_view_my_sales.md) — sales history flow
+- [ENV_SETUP.md](./ENV_SETUP.md) — environment variable setup
+- [AGENTS.md](./AGENTS.md) — project orchestration instructions
 
-- Wallet de autocustodia (el usuario no gestiona sus claves de Hedera directamente)
-- Múltiples tipos de cultivo inicialmente (enfocado en papa)
-- Integración con mercados reales de precios (solo usamos nuestros propios datos)
-- Funcionalidad avanzada de cooperativas o gestión de inventario
-- Tokenización de activos agrícolas (Hedera Token Service) - fase futura
-- Producción real con claves reales - solo demo con testnet
+## Quick Judge Path (Suggested)
 
----
+If you are evaluating the project in limited time, follow this order:
 
-ChacraChain: Donde la agricultura se encuentra con la cadena de bloques para crear transparencia y justicia en el mercado agrícola peruano.# chacra-chain
+1. [judges-guide.md](./judges-guide.md)
+2. [product.md](./product.md)
+3. [architecture.md](./architecture.md)
+4. [hedera-operations.md](./hedera-operations.md)
+5. [deployment.md](./deployment.md)

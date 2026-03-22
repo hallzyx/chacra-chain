@@ -1,71 +1,70 @@
 # Stack — ChacraChain
 
-## Decisions
-- Language: TypeScript
-- Framework: Next.js 14 (App Router)
-- Styling: Tailwind CSS (minimalista, enfocado en usabilidad agrícola)
-- Blockchain SDK: @hashgraph/sdk v2.x (enfocado en HCS)
-- Authentication: OTP via SMS/WhatsApp (simulado para demo) o credenciales simples
-- Backend: Next.js Route Handlers (API interna para auth, registro de ventas y HCS)
-- Database: `db.json` (simulación local de persistencia para demo)
-- API Communication: REST entre frontend y Route Handlers
-- Deploy: Vercel (frontend) + servicio backend separado (también en Vercel o similar)
+## Technical Decisions
+- **Language:** TypeScript
+- **Framework:** Next.js App Router
+- **Styling:** Tailwind CSS
+- **Blockchain SDK:** `@hashgraph/sdk` (HCS-focused)
+- **Authentication:** Email/password with session token
+- **Backend Layer:** Next.js Route Handlers (`/api/*`)
+- **Persistence for local development:** `db.json`
+- **Transport:** REST between frontend and Route Handlers
+- **Deployment target:** Vercel
 
 ## Agent Skills
 | Skill | Reason | Usage |
 |---|---|---|
-| `nextjs-15` | Proyecto usa Next.js App Router | Páginas, routing, Server Actions |
-| `tailwind-4` | Estilos con Tailwind | Componentes, layout responsivo |
-| `react-19` | React moderno | Componentes de UI |
+| `nextjs-15` | Next.js App Router conventions | Routing and server architecture |
+| `tailwind-4` | Tailwind styling patterns | Components and responsive UI |
+| `react-19` | Modern React patterns | Frontend components |
 
 ## Active MCPs
 | MCP | Reason | Usage |
 |---|---|---|
-| `Hedera_search_hedera` | Consultar docs de Hedera | Queries de API HCS, transacciones |
+| `Hedera_search_hedera` | Hedera protocol documentation | HCS and transaction-level references |
 
 ## Folder Structure
-```
+```txt
 src/
-├── app/              # Next.js App Router
-│   ├── page.tsx      # Home (registrar venta / consultar precio)
-│   ├── registrar-venta/  # Formulario de registro de venta
-│   └── consultar-precio/ # Consulta de precios promedio
-├── components/       # Componentes UI (formularios, botones, indicadores)
-├── lib/              # Hedera client utilities, funciones HCS
-├── backend/          # Lógica del backend (simulada en el frontend para demo)
-│   ├── auth.js       # Manejo de OTP y sesiones
-│   ├── hedera.js     # Cliente Hedera y funciones HCS
-│   └── db.js         # Simulación de base de datos para indexar HCS
-└── types/            # TypeScript interfaces
+├── app/
+│   ├── page.tsx              # Landing page
+│   ├── login/                # Authentication
+│   ├── register/             # Account registration
+│   └── (app)/
+│       ├── dashboard/        # Authenticated dashboard
+│       ├── register-sale/    # Sale registration flow
+│       ├── check-price/      # Price query flow
+│       └── my-sales/         # User sales history
+├── lib/
+│   ├── auth.ts               # Auth, session, crypto helpers
+│   ├── db.ts                 # Local data access abstraction
+│   └── hedera-server.ts      # Server-side Hedera operations
+└── types/                    # Shared TypeScript types
 ```
 
-## Environment Variables (para demo)
-| Variable | Value for demo |
+## Environment Variables
+| Variable | Purpose |
 |---|---|
-| `HEDERA_NETWORK` | testnet |
-| `HEDERA_ACCOUNT_ID` | 0.0.123456 (cuenta custodial demo) |
-| `HEDERA_PRIVATE_KEY` | 0x... (clave privada demo) |
-| `OTP_PROVIDER` | twilio (simulado) |
-| `HEDERA_HCS_TOPIC_ID` | 0.0.xxxxxxx (topic HCS de ventas) |
-| `APP_ENCRYPTION_KEY` | clave-larga-aleatoria-para-cifrado |
+| `HEDERA_ACCOUNT_ID` | Hedera operator account ID |
+| `HEDERA_PRIVATE_KEY` | Hedera operator private key |
+| `HEDERA_HCS_TOPIC_ID` | HCS topic ID used for sale messages |
+| `APP_ENCRYPTION_KEY` | Encryption key for sensitive wallet data |
 
 ## Commands
-- Dev: `npm run dev`
-- Build: `npm run build`
-- Deploy: `git push main` (Vercel auto-deploy)
+- `npm run dev` — start local development
+- `npm run build` — production build validation
+- `npm run lint` — static checks
 
-## What we ARE building (ChacraChain MVP)
-- ✅ Registro inmutable de ventas agrícolas vía HCS
-- ✅ Oráculo de precios promedio basado en datos históricos de HCS
-- ✅ Autenticación tradicional (OTP simulado) para onboard Web 2.5
-- ✅ Backend custodiado que gestiona cuentas de Hedera y subsidia gas
-- ✅ Interfaz minimalista enfocada en usabilidad para agricultores
-- ✅ Uso de Hedera Consensus Service para ordenamiento y timestamping
+## MVP Scope (Implemented)
+- ✅ Immutable agricultural sale registration through HCS
+- ✅ Price average query from historical records
+- ✅ Authenticated user dashboard and profile context
+- ✅ User-specific sales history with HashScan verification links
+- ✅ Custodial backend signing flow for Hedera interactions
 
-## What we are NOT building (en este MVP)
-- 🔲 Wallet de autocustodia (el usuario no gestiona sus claves de Hedera directamente)
-- 🔲 Múltiples tipos de cultivo inicialmente (enfocado en papa)
-- 🔲 Integración con mercados reales de precios (solo usamos nuestros propios datos)
-- 🔲 Funcionalidad avanzada de cooperativas o gestión de inventario
-- 🔲 Tokenización de activos agrícolas (Hedera Token Service) - fase futura
-- 🔲 Producción real con claves reales - solo demo con testnet
+## Out of Scope (Current MVP)
+- 🔲 Non-custodial wallet UX
+- 🔲 Advanced cooperative or inventory modules
+- 🔲 Multi-crop optimization model (beyond current baseline)
+- 🔲 Production-grade external database integration
+- 🔲 Mainnet rollout with hardened operational infrastructure

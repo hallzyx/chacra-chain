@@ -8,31 +8,32 @@
 |---|---|
 | `product.md` | ✅ complete |
 | `stack.md` | ✅ complete |
-| `userflow_registrar_venta.md` | ✅ complete |
-| `userflow_consultar_precio.md` | ✅ complete |
+| `userflow_register_sale.md` | ✅ complete |
+| `userflow_check_price.md` | ✅ complete |
+| `userflow_view_my_sales.md` | ✅ complete |
 
 ## Loading Rules
 - Before any task → read this AGENTS.md first.
-- Before implementing a feature → read `userflow_*.md` for that feature.
+- Before implementing a feature → read the matching `userflow_*.md` document.
 - Before any technical decision → read `stack.md`.
-- Before understanding the product → read `product.md`.
+- Before discussing product scope → read `product.md`.
 
 ## Demo Flow Summary
-El jurado va a ver:
-1. Pantalla principal con opciones para registrar venta o consultar precios
-2. Botón "Registrar Venta" → formulario para ingresar datos de transacción agrícola
-3. Botón "Consultar Precio" → muestra precios promedio del mercado para papa
-4. Tras registrar venta → confirma envío a HCS y muestra tx hash
-5. Tras consultar precio → muestra precio promedio basado en datos históricos en HCS
+The judges will see:
+1. Main dashboard with clear navigation for product actions
+2. **Register Sale** flow (`/register-sale`) with on-chain confirmation
+3. **Check Price** flow (`/check-price`) showing average market price
+4. **My Sales** flow (`/my-sales`) with historical records and HashScan links
+5. End-to-end usage on Hedera Testnet through HCS-backed records
 
 ## Tech Stack
-- Next.js 14 (App Router)
+- Next.js (App Router)
 - TypeScript
 - Tailwind CSS
-- @hashgraph/sdk
+- `@hashgraph/sdk`
 
 ## Current Focus
-MVP funcional - registro inmutable de ventas agrícolas y oráculo de precios usando HCS
+Finalized MVP demo for immutable agricultural sale records and transparent price intelligence on Hedera HCS.
 
 ## Running Locally
 ```bash
@@ -42,10 +43,10 @@ npm run dev
 ## Active MCPs
 | MCP | Reason | Usage |
 |---|---|---|
-| `Hedera_search_hedera` | Docs de Hedera | Queries, transacciones HCS |
+| `Hedera_search_hedera` | Hedera technical docs | HCS queries and transaction references |
 
 ## Active Skills
 | Skill | Reason | Usage |
 |---|---|---|
-| `nextjs-15` | Proyecto usa Next.js | Páginas, routing |
-| `tailwind-4` | Estilos minimalistas | UI components |
+| `nextjs-15` | Project uses Next.js App Router | Routing and page architecture |
+| `tailwind-4` | Consistent UI styling | Components and visual system |

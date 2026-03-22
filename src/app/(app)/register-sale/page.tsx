@@ -10,16 +10,11 @@ import {
   ArrowLeft,
   Sprout,
   TrendingUp,
-  LayoutGrid,
   Home,
   Receipt,
   User,
-  BadgeCheck,
   Info,
   Leaf,
-  Scale,
-  DollarSign,
-  Calendar,
   Hash
 } from "lucide-react";
 
@@ -28,7 +23,7 @@ import {
  * Styled with ChacraChain AgriTech Design System from Stich.
  * @returns Sale registration page component.
  */
-export default function RegistrarVentaPage() {
+export default function RegisterSalePage() {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -432,7 +427,7 @@ export default function RegistrarVentaPage() {
           <Home className="w-5 h-5" />
           <span className="text-[10px] font-bold">Home</span>
         </button>
-        <button onClick={() => router.push("/mis-ventas")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
+        <button onClick={() => router.push("/my-sales")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <Receipt className="w-5 h-5" />
           <span className="text-[10px] font-bold">Sales</span>
         </button>

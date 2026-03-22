@@ -43,7 +43,7 @@ interface SaleWithHcs {
  * Page showing user's sales records with HashScan links for verification.
  * Styled with ChacraChain AgriTech Design System from Stich.
  */
-export default function MisVentasPage() {
+export default function MySalesPage() {
   const router = useRouter();
   const [salesWithHcs, setSalesWithHcs] = useState<SaleWithHcs[]>([]);
   const [loading, setLoading] = useState(true);
@@ -234,7 +234,7 @@ export default function MisVentasPage() {
               <h4 className="text-foreground text-xl font-bold mb-2">No sales registered yet</h4>
               <p className="text-secondary max-w-sm mb-6">All your transactions are secure and verifiable using the Hedera transaction ID.</p>
               <button
-                onClick={() => router.push("/registrar-venta")}
+                onClick={() => router.push("/register-sale")}
                 className="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-primary/90 transition-all flex items-center gap-2"
               >
                 <PlusCircle className="w-5 h-5" />
@@ -321,7 +321,7 @@ export default function MisVentasPage() {
                <h4 className="text-foreground text-xl font-bold mb-2">End of history</h4>
                <p className="text-secondary max-w-sm mb-6">All your transactions are secure and verifiable using the Hedera transaction ID.</p>
               <button
-                onClick={() => router.push("/registrar-venta")}
+                onClick={() => router.push("/register-sale")}
                 className="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-primary/90 transition-all flex items-center gap-2"
               >
                 <PlusCircle className="w-5 h-5" />
@@ -342,7 +342,7 @@ export default function MisVentasPage() {
           <Receipt className="w-5 h-5" />
           <span className="text-[10px] font-bold">Sales</span>
         </button>
-        <button onClick={() => router.push("/consultar-precio")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
+        <button onClick={() => router.push("/check-price")} className="flex flex-col items-center gap-1 text-secondary hover:text-primary transition">
           <Store className="w-5 h-5" />
           <span className="text-[10px] font-bold">Market</span>
         </button>

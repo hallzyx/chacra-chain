@@ -6,7 +6,6 @@ import {
   PrivateKey,
   TopicMessageSubmitTransaction,
 } from "@hashgraph/sdk";
-import { decryptSensitiveValue } from "@/lib/auth";
 
 export interface CreatedHederaAccount {
   accountId: string;

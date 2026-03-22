@@ -6,11 +6,10 @@ import Link from "next/link";
 import { 
   Sprout, 
   Shield, 
-  MapPin, 
+  MapPin,
   Eye, 
   EyeOff, 
-  ArrowRight,
-  CheckCircle
+  ArrowRight
 } from "lucide-react";
 
 /**
@@ -278,7 +277,7 @@ export default function LoginPage() {
               Don&apos;t have an account?{" "}
               <button
                 type="button"
-                onClick={() => router.push("/registro")}
+                onClick={() => router.push("/register")}
                 className="font-semibold text-[#154212] hover:text-[#2d5a27] transition-colors inline-flex items-center gap-1"
               >
                 Register as a producer

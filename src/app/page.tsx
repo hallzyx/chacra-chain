@@ -15,7 +15,6 @@ import {
   X,
   Leaf,
   Database,
-  Clock,
   ExternalLink,
 } from "lucide-react";
 
@@ -107,7 +106,7 @@ export default function LandingPage() {
                 Sign in
               </button>
               <button
-                onClick={() => router.push("/registro")}
+                onClick={() => router.push("/register")}
                 className="px-5 py-2.5 bg-[#154212] text-white text-sm font-semibold rounded-xl hover:bg-[#2d5a27] transition-all hover:shadow-lg hover:shadow-[#154212]/20"
               >
                 Get started free
@@ -158,7 +157,7 @@ export default function LandingPage() {
                   Sign in
                 </button>
                 <button
-                  onClick={() => router.push("/registro")}
+                  onClick={() => router.push("/register")}
                   className="block w-full py-2.5 bg-[#154212] text-white text-center font-semibold rounded-xl"
                 >
                   Get started free
@@ -204,7 +203,7 @@ export default function LandingPage() {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <button
-                  onClick={() => router.push("/registro")}
+                  onClick={() => router.push("/register")}
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#154212] text-white font-semibold rounded-xl hover:bg-[#2d5a27] transition-all hover:shadow-xl hover:shadow-[#154212]/20 group"
                 >
                   Start now
@@ -519,7 +518,7 @@ export default function LandingPage() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                onClick={() => router.push("/registro")}
+                onClick={() => router.push("/register")}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#154212] text-white font-semibold rounded-xl hover:bg-[#2d5a27] transition-all hover:shadow-xl hover:shadow-[#154212]/20 group"
               >
                  Create free account
@@ -594,7 +593,7 @@ export default function LandingPage() {
               <ul className="space-y-3">
                 <li>
                   <Link
-                    href="/registrar-venta"
+                    href="/register-sale"
                     className="text-[#a1d494] hover:text-white transition-colors text-sm"
                   >
                      Register sale
@@ -602,7 +601,7 @@ export default function LandingPage() {
                 </li>
                 <li>
                   <Link
-                    href="/consultar-precio"
+                    href="/check-price"
                     className="text-[#a1d494] hover:text-white transition-colors text-sm"
                   >
                      Check prices
@@ -610,7 +609,7 @@ export default function LandingPage() {
                 </li>
                 <li>
                   <Link
-                    href="/mis-ventas"
+                    href="/my-sales"
                     className="text-[#a1d494] hover:text-white transition-colors text-sm"
                   >
                      My sales
